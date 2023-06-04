@@ -1,6 +1,4 @@
 const fs = require('fs');
-const SVG = require('svgson');
-
 const toSvg = require('../toSvg')
 
 const filename = './out/complex-demo.svg'
@@ -59,10 +57,7 @@ const hinge = {
 
 const bridge = `M ${bridgeStart} ${xMiddle - (bridgeRaiseFromRims + bridgeCurveFudgeFactor)} Q ${yMiddle} ${xMiddle - bridgeRaiseFromRims - bridgeUpperCurve}, ${bridgeEnd} ${xMiddle - (bridgeRaiseFromRims + bridgeCurveFudgeFactor)}`;
 
-console.log('bridge = ' + bridge)
-
-
-let json = toSvg.createSvgIcon([
+let json = toSvg.createSvgObject([
    toSvg.g([
       // outer
       toSvg.circle({
@@ -90,5 +85,5 @@ let json = toSvg.createSvgIcon([
    ], {transform: rotationCalc})
 ], {x:0, y:0}, {width:2000, height: 2000});
 
-let svg = SVG.stringify(json)
+let svg = toSvg.stringify(json)
 fs.writeFileSync(filename, svg)

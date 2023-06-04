@@ -1,3 +1,4 @@
+let SVG = require('svgson');
 
 type Origin = { x: number, y: number };
 
@@ -20,12 +21,21 @@ const elem = (name: string, attr = {}, children: object[] = [], value = ''): obj
    }
 }
 
-const text = (name: string, attr = {}, value = ''): object => {
+const text = (attr = {}, text: string): object => {
    return {
-      "name": name,
+      "name": "text",
       "type": "element",
+      "value": "",
       "attributes": attr,
-      "value": 'jjjjj'
+      "children": [
+         {
+            "name": "",
+            "type": "text",
+            "value": text,
+            "attributes": {},
+            "children": []
+         }
+      ]
    }
 }
 
@@ -38,10 +48,20 @@ const circle = (attr: {}): object => {
    return elem('circle', attributes, [])
 }
 
+const rect = (attr: {}): object => {
+   const DEF = {
+      fill: 'none',
+   };
+
+   const attributes = {...DEF, ...attr}
+   return elem('rect', attributes, [])
+}
+
 const g = (children: object[], attr = {}): object => {
    return elem('g', attr, children)
 }
-function createSvgIcon(children: object[], origin: Origin, size: Size) {
+
+function createSvgObject(children: object[], origin: Origin, size: Size): object {
    return {
       "name": "svg",
       "type": "element",
@@ -57,10 +77,12 @@ function createSvgIcon(children: object[], origin: Origin, size: Size) {
 }
 
 module.exports = {
-   createSvgIcon,
+   createSvgObject,
    g,
    circle,
    line,
    elem,
-   text
+   text,
+   rect,
+   stringify: SVG.stringify
 }
