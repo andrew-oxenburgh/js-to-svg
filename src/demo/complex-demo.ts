@@ -1,5 +1,5 @@
 const fs = require('fs');
-const toSvg = require('../toSvg')
+const toSvg = require('../toSvg')()
 
 const filename = './out/complex-demo.svg'
 

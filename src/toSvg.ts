@@ -1,88 +1,112 @@
-let SVG = require('svgson');
+module.exports = () => {
+   let SVG = require('svgson');
 
-type Origin = { x: number, y: number };
+   type Origin = { x: number, y: number };
 
-type Size = { width: number, height: number };
-const line = (attr: object): object => {
-   const DEF = {
-      'stroke-linecap': 'round'
+   type Size = { width: number, height: number };
+   const line = (attr: object): object => {
+      const DEF = {
+         'stroke-linecap': 'round'
+      }
+      const attributes = {...DEF, ...attr}
+      return elem('line', attributes, [])
    }
-   const attributes = {...DEF, ...attr}
-   return elem('line', attributes, [])
-}
 
-const elem = (name: string, attr = {}, children: object[] = [], value = ''): object => {
-   return {
-      "name": name,
-      "type": "element",
-      "value": "",
-      "attributes": attr,
-      "children": children
+   const elem = (name: string, attr = {}, children: object[] = [], value = ''): object => {
+      return {
+         "name": name,
+         "type": "element",
+         "value": "",
+         "attributes": attr,
+         "children": children
+      }
    }
-}
 
-const text = (attr = {}, text: string): object => {
-   return {
-      "name": "text",
-      "type": "element",
-      "value": "",
-      "attributes": attr,
-      "children": [
-         {
-            "name": "",
-            "type": "text",
-            "value": text,
-            "attributes": {},
-            "children": []
-         }
-      ]
+   const text = (attr = {}, text: string): object => {
+      return {
+         "name": "text",
+         "type": "element",
+         "value": "",
+         "attributes": attr,
+         "children": [
+            {
+               "name": "",
+               "type": "text",
+               "value": text,
+               "attributes": {},
+               "children": []
+            }
+         ]
+      }
    }
-}
 
-const circle = (attr: {}): object => {
-   const DEF = {
-      fill: 'none',
-   };
+   const circle = (attr: any): object => {
+      const DEF = {
+         fill: 'none',
+      };
 
-   const attributes = {...DEF, ...attr}
-   return elem('circle', attributes, [])
-}
+      if(typeof attr?.center =='object'){
+         attr.cx = attr.center.x
+         attr.cy = attr.center.y
+         delete attr.center
+      }
 
-const rect = (attr: {}): object => {
-   const DEF = {
-      fill: 'none',
-   };
+      const attributes = {...DEF, ...attr}
+      return elem('circle', attributes, [])
+   }
 
-   const attributes = {...DEF, ...attr}
-   return elem('rect', attributes, [])
-}
+   const rect = (attr: any): object => {
+      const DEF = {
+         fill: 'none',
+      };
+      if(typeof attr?.origin =='object'){
+         attr.x = attr.origin.x
+         attr.y = attr.origin.y
+         delete attr.origin
+      }
 
-const g = (children: object[], attr = {}): object => {
-   return elem('g', attr, children)
-}
+      let propName = 'size';
+      let newAttr1 = 'width';
+      let oldAttr1 = 'width';
+      let newAttr2 = 'height';
+      let oldAttr2 = 'height';
+      if(typeof attr[propName] == 'object'){
+         attr[newAttr1] = attr[propName][oldAttr1]
+         attr[newAttr2] = attr[propName][oldAttr2]
+         delete attr[propName]
+      }
 
-function createSvgObject(children: object[], origin: Origin, size: Size): object {
+      const attributes = {...DEF, ...attr}
+      return elem('rect', attributes, [])
+   }
+
+   const g = (children: object[], attr = {}): object => {
+      return elem('g', attr, children)
+   }
+
+   function createSvgObject(children: object[], origin: Origin, size: Size): object {
+      return {
+         "name": "svg",
+         "type": "element",
+         "value": "",
+         "attributes": {
+            width: size.width + '',
+            height: size.height + '',
+            viewBox: `${origin.x} ${origin.y} ${size.height} ${size.width}`,
+            xmlns: "http://www.w3.org/2000/svg"
+         },
+         "children": children
+      };
+   }
+
    return {
-      "name": "svg",
-      "type": "element",
-      "value": "",
-      "attributes": {
-         width: size.width + '',
-         height: size.height + '',
-         viewBox: `${origin.x} ${origin.y} ${size.height} ${size.width}`,
-         xmlns: "http://www.w3.org/2000/svg"
-      },
-      "children": children
-   };
-}
-
-module.exports = {
-   createSvgObject,
-   g,
-   circle,
-   line,
-   elem,
-   text,
-   rect,
-   stringify: SVG.stringify
+      createSvgObject,
+      g,
+      circle,
+      line,
+      elem,
+      text,
+      rect,
+      stringify: SVG.stringify
+   }
 }
