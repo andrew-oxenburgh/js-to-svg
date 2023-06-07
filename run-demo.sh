@@ -5,6 +5,6 @@ rm -rf ./dist
 yarn compile
 
 rm -rf ./out/*
-node ./dist/demo/number-one.js
-node ./dist/demo/circle.js
-node ./dist/demo/complex-demo.js
+node ./examples/number-one.ts
+node ./examples/circle.ts
+node ./examples/complex-demo.ts

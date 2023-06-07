@@ -1,9 +1,9 @@
-const fs = require('fs');
-const toSvg = require('../toSvg')()
+const fs = require('fs')
+const toSvg = require('../dist/toSvg')()
 
 const filename = 'out/number-one.svg'
 
-let json = toSvg.createSvgObject([
+const json = toSvg.createSvgObject([
    toSvg.g([
       toSvg.circle({
          cx: 100,
@@ -32,11 +32,11 @@ let json = toSvg.createSvgObject([
          font: 'bold 120px sans-serif',
          x: '50%',
          y: '70%',
-         "text-anchor": "middle",
-         "dominant-baseline": "middle",
+         'text-anchor': 'middle',
+         'dominant-baseline': 'middle',
       }, '1')
    ])
-], {x: 0, y: 0}, {width: 200, height: 200});
+], {x: 0, y: 0}, {width: 200, height: 200})
 
-let svgDoc = toSvg.stringify(json)
+const svgDoc = toSvg.stringify(json)
 fs.writeFileSync(filename, svgDoc)

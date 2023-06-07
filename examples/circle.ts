@@ -4,7 +4,7 @@ const toSvg = require('../toSvg')()
 
 const filename = 'out/circle.svg'
 
-let json = toSvg.createSvgObject([
+const json = toSvg.createSvgObject([
    toSvg.g([
       toSvg.circle({
          cx: 1000,
@@ -14,7 +14,7 @@ let json = toSvg.createSvgObject([
          stroke: 'none'
       }),
    ])
-], {x:0, y:0}, {width:2000, height: 2000});
+], {x:0, y:0}, {width:2000, height: 2000})
 
-let svgDoc = toSvg.stringify(json)
+const svgDoc = toSvg.stringify(json)
 fs.writeFileSync(filename, svgDoc)

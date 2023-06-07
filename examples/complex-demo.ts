@@ -1,5 +1,5 @@
-const fs = require('fs');
-const toSvg = require('../toSvg')()
+const fs = require('fs')
+const toSvg = require('../dist/toSvg')()
 
 const filename = './out/complex-demo.svg'
 
@@ -38,7 +38,7 @@ const bridgeEnd = xMiddle - bridgeSpreadFudgeFactor
 //^^^^^^^^^^^^^^^^^
 
 
-const rotationCalc = "translate(380 -270) rotate(19)";
+const rotationCalc = 'translate(380 -270) rotate(19)'
 
 
 const rim = {
@@ -52,12 +52,12 @@ const hinge = {
    y1: yMiddle,
    y2: yMiddle,
    stroke: fgColor,
-   "stroke-width": hingeStrokeWidth,
-};
+   'stroke-width': hingeStrokeWidth,
+}
 
-const bridge = `M ${bridgeStart} ${xMiddle - (bridgeRaiseFromRims + bridgeCurveFudgeFactor)} Q ${yMiddle} ${xMiddle - bridgeRaiseFromRims - bridgeUpperCurve}, ${bridgeEnd} ${xMiddle - (bridgeRaiseFromRims + bridgeCurveFudgeFactor)}`;
+const bridge = `M ${bridgeStart} ${xMiddle - (bridgeRaiseFromRims + bridgeCurveFudgeFactor)} Q ${yMiddle} ${xMiddle - bridgeRaiseFromRims - bridgeUpperCurve}, ${bridgeEnd} ${xMiddle - (bridgeRaiseFromRims + bridgeCurveFudgeFactor)}`
 
-let json = toSvg.createSvgObject([
+const json = toSvg.createSvgObject([
    toSvg.g([
       // outer
       toSvg.circle({
@@ -83,7 +83,7 @@ let json = toSvg.createSvgObject([
       // right eye
       toSvg.circle({...rim, cx: xMiddle + rimSeparation}),
    ], {transform: rotationCalc})
-], {x:0, y:0}, {width:2000, height: 2000});
+], {x:0, y:0}, {width:2000, height: 2000})
 
-let svg = toSvg.stringify(json)
+const svg = toSvg.stringify(json)
 fs.writeFileSync(filename, svg)
