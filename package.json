@@ -1,32 +1,40 @@
 {
    "name": "to-svg",
    "version": "1.0.0",
-   "description": "a way to describe svg images in js, with a bunch of helpers to make it a bit easier",
+   "description": "A way to describe svg images in js, with a bunch of helpers to make it a bit easier",
    "main": "src/index.js",
+   "keywords": [
+      "svg",
+      "template"
+   ],
    "repository": "https://github.com/andrew-oxenburgh/js-to-svg.git",
+   "homepage": "https://github.com/andrew-oxenburgh/js-to-svg#readme",
+   "bugs": "https://github.com/andrew-oxenburgh/js-to-svg/issues",
    "author": "andrew-oxenburgh <andrew.oxenburgh@gmail.com>",
    "license": "MIT",
    "module": "module",
-   "dependencies": {
-      "svgson": "^5.2.1"
-   },
+   "private": false,
    "scripts": {
       "compile": "tsc",
       "watch:tsc": "tsc --watch",
       "test": "jest tests",
-      "gen-demo": "bash ./run-demo.sh",
+      "run-demo": "bash ./run-demo.sh",
       "lint": "eslint ./src ./examples ./tests --fix"
+   },
+   "dependencies": {
+      "pretty-data": "^0.40.0",
+      "svgson": "^5.2.1"
    },
    "devDependencies": {
       "@jest/globals": "^29.5.0",
       "@types/jest": "^29.5.2",
       "@types/node": "^20.2.5",
+      "@typescript-eslint/eslint-plugin": "^5.59.9",
+      "@typescript-eslint/parser": "^5.59.9",
       "eslint": "^8.42.0",
       "jest": "^29.5.0",
       "ts-jest": "^29.1.0",
       "ts-node": "^10.9.1",
-      "typescript": "^5.1.3",
-      "@typescript-eslint/eslint-plugin": "^5.59.9",
-      "@typescript-eslint/parser": "^5.59.9"
+      "typescript": "^5.1.3"
    }
 }

@@ -1,6 +1,6 @@
 import SVG = require('svgson')
-type Origin = { x: number, y: number }
-type Size = { width: number, height: number }
+export type Origin = { x: number, y: number }
+export type Size = { width: number, height: number }
 
 function useSomeShortCuts(attr: object, propName: string, tx: string[][]) {
    if (typeof attr[propName] == 'object') {
@@ -12,16 +12,18 @@ function useSomeShortCuts(attr: object, propName: string, tx: string[][]) {
    }
 }
 
-function createSvgObject(children: object[], origin: Origin, size: Size): object {
+function createSvgObject(attr: object, children: object[]): object {
+   const DEF = {
+      xmlns: 'http://www.w3.org/2000/svg',
+      version: '1.1'
+   }
    return {
       'name': 'svg',
       'type': 'element',
       'value': '',
       'attributes': {
-         width: size.width + '',
-         height: size.height + '',
-         viewBox: `${origin.x} ${origin.y} ${size.height} ${size.width}`,
-         xmlns: 'http://www.w3.org/2000/svg'
+         ...DEF,
+         ...attr
       },
       'children': children
    }
@@ -52,7 +54,7 @@ const path = (attr: object): object => {
  * Rectangle
  * in @attr will accept a size, an origin, or a rectangle
  */
-const rect = (attr: object): object => {
+const rect = (attr: object, children: object[] = []): object => {
    const DEF = {
       fill: 'none',
    }
@@ -74,9 +76,10 @@ const rect = (attr: object): object => {
    ])
 
    const attributes = {...DEF, ...attr}
-   return elem('rect', attributes, [])
+
+   return elem('rect', attributes, children)
 }
-const circle = (attr: object): object => {
+const circle = (attr: object, children: object[] = []): object => {
    const DEF = {
       fill: 'none',
    }
@@ -88,14 +91,14 @@ const circle = (attr: object): object => {
 
    if(typeof attr['square'] === 'object'){
       const square = attr['square']
-      attr['cx'] = square.x - (square?.side / 2)
-      attr['cy'] = square.y - (square?.side / 2)
+      attr['cx'] = square.x + (square?.side / 2)
+      attr['cy'] = square.y + (square?.side / 2)
       attr['r'] = square?.side / 2
       delete attr['square']
    }
 
    const attributes = {...DEF, ...attr}
-   return elem('circle', attributes, [])
+   return elem('circle', attributes, children)
 }
 const line = (attr: object): object => {
    const DEF = {
@@ -131,6 +134,12 @@ const text = (attr = {}, text: string): object => {
       ]
    }
 }
+const animate = (attr = {}): object => {
+   return elem(
+      'animate',
+      attr
+   )
+}
 module.exports = {
    createSvgObject,
    g,
@@ -140,5 +149,6 @@ module.exports = {
    circle,
    line,
    text,
+   animate,
    stringify: SVG.stringify
 }

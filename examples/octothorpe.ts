@@ -1,7 +1,8 @@
 const fs = require('fs')
 const toSvg = require('../dist/index')
 
-const filename = 'out/octothorpe.svg'
+const path = './out'
+const filename = path + '/octothorpe.svg'
 
 const width = 200
 const height = 200
@@ -65,4 +66,5 @@ const json = toSvg.createSvgObject([
    ])], origin, size)
 
 const svgDoc = toSvg.stringify(json)
+!fs.existsSync(path) && fs.mkdirSync(path)
 fs.writeFileSync(filename, svgDoc)

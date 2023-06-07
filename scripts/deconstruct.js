@@ -17,7 +17,7 @@ const svg = `
       fill: red;
     }
   </style>
-
+    <!-- kghkjhasdjkhkjasdh -->
   <text x="20" y="35" class="small">My</text>
   <text x="40" y="35" class="heavy">cat</text>
   <text x="55" y="55" class="small">is</text>

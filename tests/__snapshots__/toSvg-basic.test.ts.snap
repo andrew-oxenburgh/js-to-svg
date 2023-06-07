@@ -1,19 +1,87 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`svg circle  - svg standard 1`] = `"<circle fill="red" cx="100" cy="150" r="165" stroke="none"/>"`;
+exports[`animation circle radius 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <rect fill="red" x="0" y="0" width="2000" height="2000"/>
+  <circle fill="red" r="50" stroke="none" cx="500" cy="500">
+    <animate attributeName="r" values="0;100;0" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="fill" values="blue;red;green" dur="3s" repeatCount="indefinite"/>
+    <animate attributeName="cx" values="0;400" dur="5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="0;400" dur="5s" repeatCount="indefinite"/>
+  </circle>
+</svg>"
+`;
 
-exports[`svg circle  - using a bounding square 1`] = `"<circle fill="red" stroke="none" cx="0" cy="10" r="50"/>"`;
+exports[`animation rect rx 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <rect fill="red" stroke="none" width="200" height="200" x="0" y="0">
+    <animate attributeName="rx" values="0;200;0" dur="2s" repeatCount="indefinite"/>
+  </rect>
+</svg>"
+`;
 
-exports[`svg circle  - using a point 1`] = `"<circle fill="red" r="233" stroke="none" cx="181" cy="191"/>"`;
+exports[`svg circle bounding square 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <circle fill="red" stroke="none" cx="250" cy="250" r="250"/>
+</svg>"
+`;
 
-exports[`svg composite doc many circles 1`] = `"<svg width="200" height="250" viewBox="1 2 250 200" xmlns="http://www.w3.org/2000/svg"><circle fill="red" r="233" stroke="none" cx="181" cy="191"/><circle fill="red" r="233" stroke="none" cx="181" cy="191"/><circle fill="red" r="233" stroke="none" cx="181" cy="191"/></svg>"`;
+exports[`svg circle point and radius 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <circle fill="red" r="233" stroke="none" cx="181" cy="191"/>
+</svg>"
+`;
 
-exports[`svg doc empty doc 1`] = `"<svg width="200" height="250" viewBox="1 2 250 200" xmlns="http://www.w3.org/2000/svg"/>"`;
+exports[`svg circle standard 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <circle fill="yellow" cx="500" cy="500" r="300" stroke="none"/>
+</svg>"
+`;
 
-exports[`svg path  - a short line 1`] = `"<path fill="red" d="M 10 10 H 90 Z" stroke="orange" stroke-width="20"/>"`;
+exports[`svg composite doc many circles 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <circle fill="yellow" r="500" stroke="none" cx="500" cy="500"/>
+  <circle fill="green" r="400" stroke="none" cx="500" cy="500"/>
+  <circle fill="blue" r="300" stroke="none" cx="500" cy="500"/>
+</svg>"
+`;
 
-exports[`svg rect  - svg standard 1`] = `"<rect fill="red" width="33" height="44" x="0" y="1" stroke="none"/>"`;
+exports[`svg doc empty doc 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+</svg>"
+`;
 
-exports[`svg rect  - using a rect 1`] = `"<rect fill="red" stroke="none" x="1" y="2" width="100" height="200"/>"`;
+exports[`svg path a short line 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <path fill="red" d="M 100 100 H 300 Z" stroke="orange" stroke-width="10"/>
+</svg>"
+`;
 
-exports[`svg rect  - using origin and size 1`] = `"<rect fill="red" stroke="none" width="3" height="7" x="0" y="1"/>"`;
+exports[`svg rect origin and size 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <rect fill="red" stroke="none" width="345" height="678" x="0" y="1"/>
+</svg>"
+`;
+
+exports[`svg rect rect 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <rect fill="red" stroke="none" x="1" y="2" width="100" height="200"/>
+</svg>"
+`;
+
+exports[`svg rect standard 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" version="1.1" width="1000" height="1000">
+  <rect fill="red" width="777" height="888" x="0" y="1" stroke="none"/>
+</svg>"
+`;
