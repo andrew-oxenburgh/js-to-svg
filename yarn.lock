@@ -2783,11 +2783,6 @@ to-regex-range@^5.0.1:
   dependencies:
     is-number "^7.0.0"
 
-to-xml@^0.1.9:
-  version "0.1.9"
-  resolved "https://registry.yarnpkg.com/to-xml/-/to-xml-0.1.9.tgz#15add009fe5004c9eaf62ce6a0bc7ed4be848262"
-  integrity sha512-rhIvYMNX2a2H7MQQXtT0UEJSfVWYQGsxwo9/4TZ9VZIKxOyVvUk0rOgvfur9MPMrsuTJk+sHn00umcC8DDNTrg==
-
 ts-jest@^29.1.0:
   version "29.1.0"
   resolved "https://registry.yarnpkg.com/ts-jest/-/ts-jest-29.1.0.tgz#4a9db4104a49b76d2b368ea775b6c9535c603891"

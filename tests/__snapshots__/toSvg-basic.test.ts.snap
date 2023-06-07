@@ -1,12 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`svg circle  - svg 1`] = `"<circle fill="red" cx="100" cy="150" r="165" stroke="none"/>"`;
+exports[`svg circle  - svg standard 1`] = `"<circle fill="red" cx="100" cy="150" r="165" stroke="none"/>"`;
+
+exports[`svg circle  - using a bounding square 1`] = `"<circle fill="red" stroke="none" cx="0" cy="10" r="50"/>"`;
 
 exports[`svg circle  - using a point 1`] = `"<circle fill="red" r="233" stroke="none" cx="181" cy="191"/>"`;
 
 exports[`svg composite doc many circles 1`] = `"<svg width="200" height="250" viewBox="1 2 250 200" xmlns="http://www.w3.org/2000/svg"><circle fill="red" r="233" stroke="none" cx="181" cy="191"/><circle fill="red" r="233" stroke="none" cx="181" cy="191"/><circle fill="red" r="233" stroke="none" cx="181" cy="191"/></svg>"`;
 
 exports[`svg doc empty doc 1`] = `"<svg width="200" height="250" viewBox="1 2 250 200" xmlns="http://www.w3.org/2000/svg"/>"`;
+
+exports[`svg path  - a short line 1`] = `"<path fill="red" d="M 10 10 H 90 Z" stroke="orange" stroke-width="20"/>"`;
 
 exports[`svg rect  - svg standard 1`] = `"<rect fill="red" width="33" height="44" x="0" y="1" stroke="none"/>"`;
 

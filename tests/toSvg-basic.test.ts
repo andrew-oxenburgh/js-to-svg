@@ -1,7 +1,6 @@
-const toSvg = require('../src/toSvg')
+const toSvg = require('../src/index')
 
 describe('svg', () => {
-
    describe('rect', () => {
       test(' - svg standard', () => {
          const json = toSvg.rect({
@@ -36,7 +35,7 @@ describe('svg', () => {
       })
    })
    describe('circle', () => {
-      test(' - svg', () => {
+      test(' - svg standard', () => {
          const json = toSvg.circle({
             cx: 100,
             cy: 150,
@@ -57,6 +56,15 @@ describe('svg', () => {
          const actual = toSvg.stringify(json)
          expect(actual).toMatchSnapshot()
       })
+      test(' - using a bounding square', () => {
+         const json = toSvg.circle({
+            square: {x: 50, y: 60, side: 100},
+            fill: 'red',
+            stroke: 'none'
+         })
+         const actual = toSvg.stringify(json)
+         expect(actual).toMatchSnapshot()
+      })
    })
 
    describe('doc', () => {
@@ -65,6 +73,18 @@ describe('svg', () => {
             [],
             {x: 1, y: 2},
             {width: 200, height: 250})
+         const actual = toSvg.stringify(json)
+         expect(actual).toMatchSnapshot()
+      })
+   })
+   describe('path', () => {
+      test(' - a short line', () => {
+         const json = toSvg.path({
+            d: 'M 10 10 H 90 Z',
+            fill: 'red',
+            stroke: 'orange',
+            'stroke-width': 20
+         })
          const actual = toSvg.stringify(json)
          expect(actual).toMatchSnapshot()
       })

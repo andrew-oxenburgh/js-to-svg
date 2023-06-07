@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-const toSvg = require('../dist/toSvg')
+const toSvg = require('../dist/index')
 
 const filename = 'out/circle.svg'
 

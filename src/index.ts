@@ -1,5 +1,5 @@
 import SVG = require('svgson')
-type Origin = { x: number, y: number };
+type Origin = { x: number, y: number }
 type Size = { width: number, height: number }
 
 function useSomeShortCuts(attr: object, propName: string, tx: string[][]) {
@@ -39,6 +39,19 @@ const elem = (name: string, attr = {}, children: object[] = []): object => {
       'children': children
    }
 }
+
+const path = (attr: object): object => {
+   const DEF = {
+      fill: 'none',
+   }
+   const attributes = {...DEF, ...attr}
+
+   return elem('path', attributes)
+}
+/**
+ * Rectangle
+ * in @attr will accept a size, an origin, or a rectangle
+ */
 const rect = (attr: object): object => {
    const DEF = {
       fill: 'none',
@@ -73,6 +86,14 @@ const circle = (attr: object): object => {
       ['cy', 'y'],
    ])
 
+   if(typeof attr['square'] === 'object'){
+      const square = attr['square']
+      attr['cx'] = square.x - (square?.side / 2)
+      attr['cy'] = square.y - (square?.side / 2)
+      attr['r'] = square?.side / 2
+      delete attr['square']
+   }
+
    const attributes = {...DEF, ...attr}
    return elem('circle', attributes, [])
 }
@@ -84,12 +105,10 @@ const line = (attr: object): object => {
       ['x1', 'x'],
       ['y1', 'y'],
    ])
-
    useSomeShortCuts(attr, 'to', [
       ['x2', 'x'],
       ['y2', 'y'],
    ])
-
 
    const attributes = {...DEF, ...attr}
    return elem('line', attributes, [])
@@ -116,6 +135,7 @@ module.exports = {
    createSvgObject,
    g,
    elem,
+   path,
    rect,
    circle,
    line,

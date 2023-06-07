@@ -1,38 +1,38 @@
 const fs = require('fs')
-const toSvg = require('../dist/toSvg')
+const toSvg = require('../dist/index')
 
 const filename = 'out/octothorpe.svg'
 
-/*
-* Create a # symbol
-*
-* Create 2 point on top,  left, and bottom right of
-*
-*
-* */
-
 const width = 200
 const height = 200
-let origin = {x: 0, y: 0};
+const origin = {x: 0, y: 0}
 const size = {width, height}
-const offset = 20
+
+// inset from margins of view
+const inset = 20
+
+// how far from vertical does it lean.
 const lean = 15
 
 const division = 32
 const majorAmount = 11
 const minorAmount = division - majorAmount
 
-const topLeftPoint = {x: width * majorAmount / division + lean, y: 0 + offset}
-const topRightPoint = {x: width * minorAmount / division + lean, y: 0 + offset}
+// top
+const topLeftPoint = {x: width * majorAmount / division + lean, y: 0 + inset}
+const topRightPoint = {x: width * minorAmount / division + lean, y: 0 + inset}
 
-const bottomLeftPoint = {x: width * majorAmount / division - lean, y: height - offset}
-const bottomRightPoint = {x: width * minorAmount / division - lean, y: height - offset}
+// right
+const rightUpperPoint = {x: width - inset, y: height * minorAmount / division}
+const rightLowerPoint = {x: width - inset, y: height * majorAmount / division}
 
-const leftUpperPoint = {x: 0 + offset, y: height * minorAmount / division}
-const leftLowerPoint = {x: 0 + offset, y: height * majorAmount / division}
+// bottom
+const bottomLeftPoint = {x: width * majorAmount / division - lean, y: height - inset}
+const bottomRightPoint = {x: width * minorAmount / division - lean, y: height - inset}
 
-const rightUpperPoint = {x: width - offset, y: height * minorAmount / division}
-const rightLowerPoint = {x: width - offset, y: height * majorAmount / division}
+// left
+const leftUpperPoint = {x: 0 + inset, y: height * minorAmount / division}
+const leftLowerPoint = {x: 0 + inset, y: height * majorAmount / division}
 
 const style = {
    fill: 'white',
