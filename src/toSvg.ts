@@ -1,3 +1,13 @@
+function useSomeShortCuts(attr: any, propName: string, tx: string[][]) {
+   if (typeof attr[propName] == 'object') {
+      for (let off in tx) {
+         const transform = tx[off]
+         attr[transform[0]] = attr[propName][transform[1]]
+      }
+      delete attr[propName]
+   }
+}
+
 module.exports = () => {
    let SVG = require('svgson');
 
@@ -45,11 +55,10 @@ module.exports = () => {
          fill: 'none',
       };
 
-      if(typeof attr?.center =='object'){
-         attr.cx = attr.center.x
-         attr.cy = attr.center.y
-         delete attr.center
-      }
+      useSomeShortCuts(attr, 'center', [
+         ['cx', 'x'],
+         ['cy', 'y'],
+      ]);
 
       const attributes = {...DEF, ...attr}
       return elem('circle', attributes, [])
@@ -59,22 +68,22 @@ module.exports = () => {
       const DEF = {
          fill: 'none',
       };
-      if(typeof attr?.origin =='object'){
-         attr.x = attr.origin.x
-         attr.y = attr.origin.y
-         delete attr.origin
-      }
+      useSomeShortCuts(attr, 'size', [
+         ['width', 'width'],
+         ['height', 'height'],
+      ]);
 
-      let propName = 'size';
-      let newAttr1 = 'width';
-      let oldAttr1 = 'width';
-      let newAttr2 = 'height';
-      let oldAttr2 = 'height';
-      if(typeof attr[propName] == 'object'){
-         attr[newAttr1] = attr[propName][oldAttr1]
-         attr[newAttr2] = attr[propName][oldAttr2]
-         delete attr[propName]
-      }
+      useSomeShortCuts(attr, 'origin', [
+         ['x', 'x'],
+         ['y', 'y'],
+      ]);
+
+      useSomeShortCuts(attr, 'rect', [
+         ['x', 'x'],
+         ['y', 'y'],
+         ['width', 'width'],
+         ['height', 'height'],
+      ]);
 
       const attributes = {...DEF, ...attr}
       return elem('rect', attributes, [])
