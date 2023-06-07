@@ -1,5 +1,6 @@
+const toSvg = require('../src/toSvg')
+
 describe('svg', () => {
-   const toSvg = require('../dist/toSvg')()
 
    describe('rect', () => {
       test(' - svg standard', () => {
@@ -26,7 +27,7 @@ describe('svg', () => {
       })
       test(' - using a rect', () => {
          const json = toSvg.rect({
-            rect: {x: 1, y: 2, width:100, height: 200},
+            rect: {x: 1, y: 2, width: 100, height: 200},
             fill: 'red',
             stroke: 'none'
          })
@@ -76,12 +77,12 @@ describe('svg', () => {
                r: 233,
                fill: 'red',
                stroke: 'none'
-            }),toSvg.circle({
+            }), toSvg.circle({
                center: {x: 181, y: 191},
                r: 233,
                fill: 'red',
                stroke: 'none'
-            }),toSvg.circle({
+            }), toSvg.circle({
                center: {x: 181, y: 191},
                r: 233,
                fill: 'red',

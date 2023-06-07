@@ -34,6 +34,7 @@ module.exports = {
         "semi": [
             "error",
             "never"
-        ]
+        ],
+       "@typescript-eslint/no-var-requires": "off"
     }
 }
