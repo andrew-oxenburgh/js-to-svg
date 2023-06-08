@@ -7,7 +7,7 @@ const fs = require('fs')
 
 function expectSnapshot(json: object, title: string | null = null) {
 
-   const inputArray = title ? [ toSvg.title(title), json] : [json]
+   const inputArray = title ? [toSvg.title(title), json] : [json]
    const wrapped = toSvg.createSvgObject(
       {width: 1000, height: 1000},
       inputArray
@@ -34,7 +34,7 @@ describe('clipPath', () => {
          toSvg.elem('clipPath',
             {id: 'myClip'},
             [
-               toSvg.circle({cx: 40, cy: 40, r: 20, fill:'red'})
+               toSvg.circle({cx: 40, cy: 40, r: 20, fill: 'red'})
             ]
          ),
          toSvg.path({
@@ -51,6 +51,13 @@ describe('clipPath', () => {
       expectSnapshot(json, 'demonstrate clipping')
    })
 })
+describe('really small', () => {
+   test('circle', () => {
+      const square = {x:0, y:0, side:100}
+      const circle = toSvg.circle({square, fill:'yellow'})
+      let actual = toSvg.stringify(circle)
+   })
+})
 describe('animation', () => {
    describe('rect', () => {
       test('rx', () => {
@@ -63,11 +70,11 @@ describe('animation', () => {
             stroke: 'none',
          }, [
             toSvg.animate({
-               attributeName: 'rx',
-               values: '0;200;0',
-               dur: '2s',
-               repeatCount: 'indefinite'
-            }
+                  attributeName: 'rx',
+                  values: '0;200;0',
+                  dur: '2s',
+                  repeatCount: 'indefinite'
+               }
             )
          ])
          expectSnapshot(json, 'create a rect given a size and an origin')
@@ -87,32 +94,32 @@ describe('animation', () => {
                stroke: 'none',
             }, [
                toSvg.animate({
-                  attributeName: 'r',
-                  values: '0;100;0',
-                  dur: '5s',
-                  repeatCount: 'indefinite'
-               }
+                     attributeName: 'r',
+                     values: '0;100;0',
+                     dur: '5s',
+                     repeatCount: 'indefinite'
+                  }
                ),
                toSvg.animate({
-                  attributeName: 'fill',
-                  values: 'blue;red;green',
-                  dur: '3s',
-                  repeatCount: 'indefinite'
-               }
+                     attributeName: 'fill',
+                     values: 'blue;red;green',
+                     dur: '3s',
+                     repeatCount: 'indefinite'
+                  }
                ),
                toSvg.animate({
-                  attributeName: 'cx',
-                  values: '0;400',
-                  dur: '5s',
-                  repeatCount: 'indefinite'
-               }
+                     attributeName: 'cx',
+                     values: '0;400',
+                     dur: '5s',
+                     repeatCount: 'indefinite'
+                  }
                ),
                toSvg.animate({
-                  attributeName: 'cy',
-                  values: '0;400',
-                  dur: '5s',
-                  repeatCount: 'indefinite'
-               }
+                     attributeName: 'cy',
+                     values: '0;400',
+                     dur: '5s',
+                     repeatCount: 'indefinite'
+                  }
                )
             ])]
          expectSnapshot(json, 'a bunch of really ugly animations')

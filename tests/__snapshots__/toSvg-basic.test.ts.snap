@@ -36,6 +36,22 @@ exports[`clipPath heart 1`] = `
 </svg>"
 `;
 
+exports[`really small circle 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>really small</title>
+  <circle fill="yellow" cx="NaN" cy="NaN" r="NaN"/>
+</svg>"
+`;
+
+exports[`rect rx 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>really small</title>
+  <circle fill="yellow" cx="NaN" cy="NaN" r="NaN"/>
+</svg>"
+`;
+
 exports[`svg circle bounding square 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">

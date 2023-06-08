@@ -2,6 +2,9 @@
 
 Use JS to create an SVG file.
 
+[why](docs/why.md)
+[usage](docs/usage.md)
+
 A benefit to this approach, is you can do any maths you need in JS, and then easily transfer it into an SVG. It might not look like much in a small SVG, but over a complex
 
 I designed to-svg with the backend in mind. I was trying to create an icon by hand, and this sort of came out of it.
@@ -36,34 +39,4 @@ generates XML like this:
 and a file that looks like this:
 
 ![a simple circle described using js](./out/circle.svg)
-
-### the `elem` call, to create any undefined element
-
-You can create any element using the `elem` call.
-```ts
-function elem(name: string, attribs: object, children: object[]) {
-}
-// for example
-toSvg.elem('circle', {cx: 100, cy: 100, r: 50, fill: 'yellow'})
-toSvg.elem('polygon', {points: '100,100 150,25 150,75 200,0', fill: 'yellow', stroke: 'black'})
-```
-
-### Some syntactic sugar, to make things a bit easier
-
-I have provided some alternative methods of passing in boundaries.
-
-For instance, A circle will accept the usual `{cx, cy, r}`, or` {center:{x, y}, r}`, or a bounding square `{square:{x, y, side}`
-
-For example, a circle could be defined in any of these ways:
-
-```js
-    toSvg.elem('circle', {cx: 100, cy: 100, r: 50, fill: 'yellow'})
-    toSvg.circle({cx: 100, cy: 100, r: 50, fill: 'yellow'})
-    toSvg.circle({center: {x: 100, y:100}, r: 50, fill: 'yellow'})
-    toSvg.circle({square: {x: 50, y:50, side:100}, fill: 'yellow'})
-```
-
-I have saved all the output from my jest tests so you can see the output here.
-[examples from jest tests](tests/__out__)
-
 
