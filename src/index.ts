@@ -15,7 +15,6 @@ function useSomeShortCuts(attr: object, propName: string, tx: string[][]) {
 function createSvgObject(attr: object, children: object[]): object {
    const DEF = {
       xmlns: 'http://www.w3.org/2000/svg',
-      version: '1.1'
    }
    return {
       'name': 'svg',
