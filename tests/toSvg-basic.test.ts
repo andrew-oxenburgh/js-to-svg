@@ -237,10 +237,12 @@ describe('svg', () => {
 })
 
 test('animateMotion', () => {
+   const green = '#8FBC8F'
    const path = 'M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z'
    const json = toSvg.g([
+      toSvg.rect({fill: green, stroke: 'none', rect: {x:0, y:0, width: 200, height: 100}}),
       toSvg.path({fill: 'none', stroke: 'lightgrey', d: path}),
-      toSvg.circle({r: 5, fill: 'red'}, [
+      toSvg.circle({r: 5, fill: 'coral'}, [
          toSvg.elem('animateMotion', {
             dur: '10s',
             repeatCount: 'indefinite',
