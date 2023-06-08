@@ -6,7 +6,6 @@ const pd = require('pretty-data').pd
 const fs = require('fs')
 
 function expectSnapshot(json: object, title: string | null = null) {
-
    const inputArray = title ? [toSvg.title(title), json] : [json]
    const wrapped = toSvg.createSvgObject(
       {width: 1000, height: 1000},
@@ -53,16 +52,16 @@ describe('clipPath', () => {
 })
 describe('really small', () => {
    test('circle', () => {
-      const square = {x:0, y:0, side:100}
-      const circle = toSvg.circle({square, fill:'yellow'})
-      let actual = toSvg.stringify(circle)
+      const square = {x: 0, y: 0, side: 100}
+      const circle = toSvg.circle({square, fill: 'yellow'})
+      toSvg.stringify(circle)
    })
 })
 describe('animation', () => {
    describe('rect', () => {
       test('rx', () => {
          const size = {width: 200, height: 200}
-         let origin = {x: 0, y: 0};
+         const origin = {x: 0, y: 0}
          const json = toSvg.rect({
             origin,
             size,
@@ -237,3 +236,17 @@ describe('svg', () => {
    })
 })
 
+test('animateMotion', () => {
+   const path = 'M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z'
+   const json = toSvg.g([
+      toSvg.path({fill: 'none', stroke: 'lightgrey', d: path}),
+      toSvg.circle({r: 5, fill: 'red'}, [
+         toSvg.elem('animateMotion', {
+            dur: '10s',
+            repeatCount: 'indefinite',
+            path
+         })
+      ]),
+   ])
+   expectSnapshot(json, 'animateMotion')
+})

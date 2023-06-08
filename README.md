@@ -46,5 +46,3 @@ and a file that looks like this:
 It also handles animation quite nicely.
 
 ![a really ugly animation](./tests/__out__/animation_circle_radius.svg)
-
-

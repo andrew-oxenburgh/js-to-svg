@@ -1,5 +1,18 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`animateMotion 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>animateMotion</title>
+  <g>
+    <path fill="none" stroke="lightgrey" d="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z"/>
+    <circle fill="red" r="5">
+      <animateMotion dur="10s" repeatCount="indefinite" path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z"/>
+    </circle>
+  </g>
+</svg>"
+`;
+
 exports[`animation circle radius 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
@@ -33,22 +46,6 @@ exports[`clipPath heart 1`] = `
   </clipPath>
   <path id="heart" d="M10,30 A20,20,0,0,1,50,30 A20,20,0,0,1,90,30 Q90,60,50,90 Q10,60,10,30 Z"/>
   <use clip-path="url(#myClip)" href="#heart" fill="red"/>
-</svg>"
-`;
-
-exports[`really small circle 1`] = `
-"<svg 
-  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
-  <title>really small</title>
-  <circle fill="yellow" cx="NaN" cy="NaN" r="NaN"/>
-</svg>"
-`;
-
-exports[`rect rx 1`] = `
-"<svg 
-  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
-  <title>really small</title>
-  <circle fill="yellow" cx="NaN" cy="NaN" r="NaN"/>
 </svg>"
 `;
 
