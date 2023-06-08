@@ -42,13 +42,12 @@ const elem = (name: string, attr = {}, children: object[] = []): object => {
    }
 }
 
-const path = (attr: object): object => {
+const path = (attr: object, children: object[] = []): object => {
    const DEF = {
-      fill: 'none',
    }
    const attributes = {...DEF, ...attr}
 
-   return elem('path', attributes)
+   return elem('path', attributes, children)
 }
 /**
  * Rectangle
@@ -56,7 +55,6 @@ const path = (attr: object): object => {
  */
 const rect = (attr: object, children: object[] = []): object => {
    const DEF = {
-      fill: 'none',
    }
    useSomeShortCuts(attr, 'size', [
       ['width', 'width'],
@@ -100,7 +98,7 @@ const circle = (attr: object, children: object[] = []): object => {
    const attributes = {...DEF, ...attr}
    return elem('circle', attributes, children)
 }
-const line = (attr: object): object => {
+const line = (attr: object, children: object[] = []): object => {
    const DEF = {
       'stroke-linecap': 'round'
    }
@@ -114,7 +112,7 @@ const line = (attr: object): object => {
    ])
 
    const attributes = {...DEF, ...attr}
-   return elem('line', attributes, [])
+   return elem('line', attributes, children)
 }
 
 const text = (attr = {}, text: string): object => {

@@ -1,8 +1,9 @@
 'use strict'
+import {expect} from '@jest/globals'
+
 const toSvg = require('../src/index')
 const pd = require('pretty-data').pd
 const fs = require('fs')
-
 
 function expectSnapshot(json: object) {
    const wrapped = toSvg.createSvgObject(
@@ -22,6 +23,29 @@ function expectSnapshot(json: object) {
    expect(actual).toMatchSnapshot()
 }
 
+describe('clipPath', () => {
+   test('heart', () => {
+      const json = [
+         toSvg.elem('clipPath',
+            {id: 'myClip'},
+            [
+               toSvg.circle({cx: 40, cy: 40, r: 20, fill:'red'})
+            ]
+         ),
+         toSvg.path({
+            id: 'heart',
+            d: 'M10,30 A20,20,0,0,1,50,30 A20,20,0,0,1,90,30 Q90,60,50,90 Q10,60,10,30 Z'
+         }),
+         toSvg.elem('use',
+            {
+               'clip-path': 'url(#myClip)',
+               href: '#heart',
+               fill: 'red'
+            })
+      ]
+      expectSnapshot(json)
+   })
+})
 describe('animation', () => {
    describe('rect', () => {
       test('rx', () => {
