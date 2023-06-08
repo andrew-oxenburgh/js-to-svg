@@ -1,5 +1,6 @@
 <svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>got lots of things going on</title>
   <circle fill="yellow" r="500" stroke="none" cx="500" cy="500"/>
   <circle fill="green" r="400" stroke="none" cx="500" cy="500"/>
   <circle fill="blue" r="300" stroke="none" cx="500" cy="500"/>

@@ -1,5 +1,6 @@
 <svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>a bunch of really ugly animations</title>
   <rect fill="red" x="0" y="0" width="2000" height="2000"/>
   <circle fill="red" r="50" stroke="none" cx="500" cy="500">
     <animate attributeName="r" values="0;100;0" dur="5s" repeatCount="indefinite"/>

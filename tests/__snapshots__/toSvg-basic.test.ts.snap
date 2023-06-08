@@ -3,6 +3,7 @@
 exports[`animation circle radius 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>a bunch of really ugly animations</title>
   <rect fill="red" x="0" y="0" width="2000" height="2000"/>
   <circle fill="red" r="50" stroke="none" cx="500" cy="500">
     <animate attributeName="r" values="0;100;0" dur="5s" repeatCount="indefinite"/>
@@ -16,6 +17,7 @@ exports[`animation circle radius 1`] = `
 exports[`animation rect rx 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a rect given a size and an origin</title>
   <rect fill="red" stroke="none" width="200" height="200" x="0" y="0">
     <animate attributeName="rx" values="0;200;0" dur="2s" repeatCount="indefinite"/>
   </rect>
@@ -25,6 +27,7 @@ exports[`animation rect rx 1`] = `
 exports[`clipPath heart 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>demonstrate clipping</title>
   <clipPath id="myClip">
     <circle fill="red" cx="40" cy="40" r="20"/>
   </clipPath>
@@ -36,6 +39,7 @@ exports[`clipPath heart 1`] = `
 exports[`svg circle bounding square 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a circle with a bounding square</title>
   <circle fill="red" stroke="none" cx="250" cy="250" r="250"/>
 </svg>"
 `;
@@ -43,6 +47,7 @@ exports[`svg circle bounding square 1`] = `
 exports[`svg circle point and radius 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a circle with a center point and a radius</title>
   <circle fill="red" r="233" stroke="none" cx="181" cy="191"/>
 </svg>"
 `;
@@ -50,6 +55,7 @@ exports[`svg circle point and radius 1`] = `
 exports[`svg circle standard 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a circle with standard svg attributes</title>
   <circle fill="yellow" cx="500" cy="500" r="300" stroke="none"/>
 </svg>"
 `;
@@ -57,6 +63,7 @@ exports[`svg circle standard 1`] = `
 exports[`svg composite doc many circles 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>got lots of things going on</title>
   <circle fill="yellow" r="500" stroke="none" cx="500" cy="500"/>
   <circle fill="green" r="400" stroke="none" cx="500" cy="500"/>
   <circle fill="blue" r="300" stroke="none" cx="500" cy="500"/>
@@ -66,12 +73,14 @@ exports[`svg composite doc many circles 1`] = `
 exports[`svg doc empty doc 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create an empty doc</title>
 </svg>"
 `;
 
 exports[`svg path a short line 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a path</title>
   <path d="M 100 100 H 300 Z" fill="red" stroke="orange" stroke-width="10"/>
 </svg>"
 `;
@@ -79,6 +88,7 @@ exports[`svg path a short line 1`] = `
 exports[`svg rect origin and size 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a rect with an origin and a size</title>
   <rect fill="red" stroke="none" width="345" height="678" x="0" y="1"/>
 </svg>"
 `;
@@ -86,6 +96,7 @@ exports[`svg rect origin and size 1`] = `
 exports[`svg rect rect 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a rect with a input rect structure</title>
   <rect fill="red" stroke="none" x="1" y="2" width="100" height="200"/>
 </svg>"
 `;
@@ -93,6 +104,7 @@ exports[`svg rect rect 1`] = `
 exports[`svg rect standard 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a rect using standard svg attributes</title>
   <rect width="777" height="888" x="0" y="1" fill="red" stroke="none"/>
 </svg>"
 `;

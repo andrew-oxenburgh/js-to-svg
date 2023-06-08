@@ -1,4 +1,4 @@
-# js-to-svg
+# to-svg
 
 Use JS to create an SVG file.
 
@@ -8,6 +8,7 @@ I designed to-svg with the backend in mind. I was trying to create an icon by ha
 
 I added some shortcuts, so you can create a circle using cx, cy, and r as specified, but you can also pass in a bounding square, or a center point and radius which might save you some maths if you need to calc the same thing multiple times.
 
+### example
 For example, given a program such as:
 
 ```js
@@ -35,3 +36,33 @@ generates XML like this:
 and a file that looks like this:
 
 ![a simple circle described using js](./out/circle.svg)
+
+### the `elem` call, to create any undefined element
+
+You can create any element using the `elem` call.
+```ts
+function elem(name: string, attribs: object, children: object[]) {
+}
+// for example
+toSvg.elem('circle', {cx: 100, cy: 100, r: 50, fill: 'yellow'})
+toSvg.elem('polygon', {points: '100,100 150,25 150,75 200,0', fill: 'yellow', stroke: 'black'})
+```
+
+### Some syntactic sugar, to make things a bit easier
+
+I have provided some alternative methods of passing in boundaries.
+
+For instance, A circle will accept the usual `{cx, cy, r}`, or` {center:{x, y}, r}`, or a bounding square `{square:{x, y, side}`
+
+For example, a circle could be defined in any of these ways:
+
+```js
+    toSvg.elem('circle', {cx: 100, cy: 100, r: 50, fill: 'yellow'})
+    toSvg.circle({cx: 100, cy: 100, r: 50, fill: 'yellow'})
+    toSvg.circle({center: {x: 100, y:100}, r: 50, fill: 'yellow'})
+    toSvg.circle({square: {x: 50, y:50, side:100}, fill: 'yellow'})
+```
+
+[examples from jest tests](blob/main/tests/__out__)
+
+

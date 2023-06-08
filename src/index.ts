@@ -131,6 +131,23 @@ const text = (attr = {}, text: string): object => {
       ]
    }
 }
+const title = (text: string): object => {
+   return {
+      'name': 'title',
+      'type': 'element',
+      'value': '',
+      'attributes': {},
+      'children': [
+         {
+            'name': '',
+            'type': 'text',
+            'value': text,
+            'attributes': {},
+            'children': []
+         }
+      ]
+   }
+}
 const animate = (attr = {}): object => {
    return elem(
       'animate',
@@ -146,6 +163,7 @@ module.exports = {
    circle,
    line,
    text,
+   title,
    animate,
    stringify: SVG.stringify
 }
