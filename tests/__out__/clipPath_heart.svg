@@ -1,8 +1,9 @@
-<svg
-   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
-   <clipPath id="myClip">
-      <circle fill="red" cx="40" cy="40" r="20"/>
-   </clipPath>
-   <path id="heart" d="M10,30 A20,20,0,0,1,50,30 A20,20,0,0,1,90,30 Q90,60,50,90 Q10,60,10,30 Z"/>
-   <use clip-path="url(#myClip)" href="#heart" fill="red"/>
+<svg 
+  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>demonstrate clipping</title>
+  <clipPath id="myClip">
+    <circle fill="red" cx="40" cy="40" r="20"/>
+  </clipPath>
+  <path id="heart" d="M10,30 A20,20,0,0,1,50,30 A20,20,0,0,1,90,30 Q90,60,50,90 Q10,60,10,30 Z"/>
+  <use clip-path="url(#myClip)" href="#heart" fill="red"/>
 </svg>

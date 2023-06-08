@@ -63,6 +63,7 @@ For example, a circle could be defined in any of these ways:
     toSvg.circle({square: {x: 50, y:50, side:100}, fill: 'yellow'})
 ```
 
+I have saved all the output from my jest tests so you can see the output here.
 [examples from jest tests](tests/__out__)
 
 
