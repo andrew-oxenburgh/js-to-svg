@@ -1,31 +1,7 @@
 'use strict'
-import {expect} from '@jest/globals'
+import {testUtils} from "./test-utils";
 
 const toSvg = require('../src/index')
-const pd = require('pretty-data').pd
-const fs = require('fs')
-
-function expectSnapshot(json: object, title: string | null = null) {
-   const inputArray = title ? [toSvg.title(title), json] : [json]
-   const wrapped = toSvg.createSvgObject(
-      {width: 1000, height: 1000},
-      inputArray
-   )
-   let actual = toSvg.stringify(wrapped)
-   actual = pd.xml(actual)
-   const testname = expect.getState().currentTestName
-   const dir = './tests/__out__/'
-   const htmlFile = dir + testname.replace(/ /g, '_') + '.html'
-   const svgFile = dir + testname.replace(/ /g, '_') + '.svg'
-
-   !fs.existsSync(dir) && fs.mkdirSync(dir)
-   fs.existsSync(htmlFile) && fs.unlinkSync(htmlFile)
-   fs.writeFileSync(htmlFile, actual)
-   fs.existsSync(svgFile) && fs.unlinkSync(svgFile)
-   fs.writeFileSync(svgFile, actual)
-
-   expect(actual).toMatchSnapshot()
-}
 
 describe('clipPath', () => {
    test('heart', () => {
@@ -47,7 +23,7 @@ describe('clipPath', () => {
                fill: 'red'
             })
       ]
-      expectSnapshot(json, 'demonstrate clipping')
+      testUtils(json, 'demonstrate clipping')
    })
 })
 describe('really small', () => {
@@ -76,7 +52,7 @@ describe('animation', () => {
                }
             )
          ])
-         expectSnapshot(json, 'create a rect given a size and an origin')
+         testUtils(json, 'create a rect given a size and an origin')
       })
    })
    describe('circle', () => {
@@ -121,7 +97,7 @@ describe('animation', () => {
                   }
                )
             ])]
-         expectSnapshot(json, 'a bunch of really ugly animations')
+         testUtils(json, 'a bunch of really ugly animations')
       })
    })
 })
@@ -136,7 +112,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         expectSnapshot(json, 'create a rect using standard svg attributes')
+         testUtils(json, 'create a rect using standard svg attributes')
       })
       test('origin and size', () => {
          const origin = {x: 0, y: 1}
@@ -147,7 +123,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         expectSnapshot(json, 'create a rect with an origin and a size')
+         testUtils(json, 'create a rect with an origin and a size')
       })
       test('rect', () => {
          const rect = {x: 1, y: 2, width: 100, height: 200}
@@ -156,7 +132,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         expectSnapshot(json, 'create a rect with a input rect structure')
+         testUtils(json, 'create a rect with a input rect structure')
       })
    })
    describe('circle', () => {
@@ -168,7 +144,7 @@ describe('svg', () => {
             fill: 'yellow',
             stroke: 'none'
          })
-         expectSnapshot(json, 'create a circle with standard svg attributes')
+         testUtils(json, 'create a circle with standard svg attributes')
       })
       test('point and radius', () => {
          const center = {x: 181, y: 191}
@@ -178,7 +154,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         expectSnapshot(json, 'create a circle with a center point and a radius')
+         testUtils(json, 'create a circle with a center point and a radius')
       })
       test('bounding square', () => {
          const square = {x: 0, y: 0, side: 500}
@@ -187,13 +163,13 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         expectSnapshot(json, 'create a circle with a bounding square')
+         testUtils(json, 'create a circle with a bounding square')
       })
    })
 
    describe('doc', () => {
       test('empty doc', () => {
-         expectSnapshot([], 'create an empty doc')
+         testUtils([], 'create an empty doc')
       })
    })
    describe('path', () => {
@@ -204,7 +180,7 @@ describe('svg', () => {
             stroke: 'orange',
             'stroke-width': 10
          })
-         expectSnapshot(json, 'create a path')
+         testUtils(json, 'create a path')
       })
    })
    describe('composite doc', () => {
@@ -227,7 +203,7 @@ describe('svg', () => {
             fill: 'blue',
             stroke: 'none'
          })
-         expectSnapshot([
+         testUtils([
             circle1,
             circle2,
             circle3
@@ -250,7 +226,7 @@ test('animateMotion', () => {
          })
       ]),
    ])
-   expectSnapshot(json, 'animateMotion')
+   testUtils(json, 'animateMotion')
 })
 
 test('boxesWithinBoxes', () => {
@@ -272,5 +248,5 @@ test('boxesWithinBoxes', () => {
       toSvg.rect({rect: rect3, fill: 'yellow', stroke: 'none'}),
       toSvg.rect({rect: rect4, fill: 'purple', stroke: 'none'}),
    ])
-   expectSnapshot(json, 'boxesWithinBoxes')
+   testUtils(json, 'boxesWithinBoxes')
 })
