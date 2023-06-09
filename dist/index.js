@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const SVG = require("svgson");
+const pathUtils = require("./path-utilities");
 function useSomeShortCuts(attr, propName, tx) {
     if (typeof attr[propName] == 'object') {
         for (const off in tx) {
@@ -132,39 +133,6 @@ const title = (text) => {
 const animate = (attr = {}) => {
     return elem('animate', attr);
 };
-const moveA = (point) => {
-    return `M${point.x},${point.y}`;
-};
-const moveR = (point) => {
-    return `m${point.x},${point.y}`;
-};
-const complete = () => {
-    return 'Z';
-};
-function arcA(arc) {
-    if (typeof arc === 'string') {
-        return arc;
-    }
-    return `A${arc.rx},${arc.ry},${arc.angle},${arc.largeArcFlag},${arc.sweepFlag},${arc.x},${arc.y}`;
-}
-/**
- * Accept an array of points
- * @param points
- */
-function quadraticA(points) {
-    if (typeof points === 'string') {
-        return points;
-    }
-    if (points.length < 1) {
-        return '';
-    }
-    const res = 'Q' + points.reduce((acc, point) => {
-        acc += `${point.x},${point.y},`;
-        return acc;
-    }, '');
-    const removeTrailingComma = res.slice(0, res.length - 1);
-    return removeTrailingComma;
-}
 module.exports = {
     createSvgObject,
     g,
@@ -176,11 +144,7 @@ module.exports = {
     text,
     title,
     animate,
-    quadraticA,
-    moveA,
-    moveR,
-    arcA,
-    complete,
+    pathUtils,
     stringify: SVG.stringify
 };
 //# sourceMappingURL=index.js.map

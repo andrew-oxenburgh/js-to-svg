@@ -1,22 +1,7 @@
-export type Origin = {
-    x: number;
-    y: number;
-};
 export type Size = {
     width: number;
     height: number;
 };
-export type Point = {
-    x: number;
-    y: number;
-};
-export type Rect = {
-    x: number;
-    y: number;
-    width: number;
-    height: number;
-};
-export type Points = Point[];
 export type VerticalLine = {
     x: number;
 };
@@ -24,6 +9,9 @@ export type HorizontalLine = {
     y: number;
 };
 export type Line = VerticalLine | HorizontalLine;
+export type Point = VerticalLine & HorizontalLine;
+export type Points = Point[];
+export type Rect = Point & Size;
 export type Arc = {
     rx: number;
     ry: number;

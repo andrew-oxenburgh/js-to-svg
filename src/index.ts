@@ -1,26 +1,10 @@
 import SVG = require('svgson')
+import * as pathUtils from './path-utilities'
 
-export type Origin = {
-   x: number
-   y: number
-}
 export type Size = {
    width: number,
    height: number
 }
-export type Point = {
-   x: number
-   y: number
-}
-
-export type Rect = {
-   x: number
-   y: number
-   width: number
-   height: number
-}
-
-export type Points = Point[]
 
 export type VerticalLine = {
    x: number
@@ -31,6 +15,12 @@ export type HorizontalLine = {
 }
 
 export type Line = | VerticalLine | HorizontalLine
+
+export type Point = VerticalLine & HorizontalLine
+
+export type Points = Point[]
+
+export type Rect = Point & Size
 
 export type Arc = {
    rx: number
@@ -194,44 +184,6 @@ const animate = (attr = {}): object => {
    )
 }
 
-const moveA = (point: Point): string => {
-   return `M${point.x},${point.y}`
-}
-
-const moveR = (point: Point): string => {
-   return `m${point.x},${point.y}`
-}
-
-const complete = (): string => {
-   return 'Z'
-}
-
-function arcA(arc: Arc | string) {
-   if (typeof arc === 'string') {
-      return arc
-   }
-   return `A${arc.rx},${arc.ry},${arc.angle},${arc.largeArcFlag},${arc.sweepFlag},${arc.x},${arc.y}`
-}
-
-/**
- * Accept an array of points
- * @param points
- */
-function quadraticA(points: Point[]) {
-   if (typeof points === 'string') {
-      return points
-   }
-   if (points.length < 1) {
-      return ''
-   }
-   const res = 'Q' + points.reduce((acc: string, point: Point) => {
-      acc += `${point.x},${point.y},`
-      return acc
-   }, '')
-   const removeTrailingComma = res.slice(0, res.length - 1)
-   return removeTrailingComma
-}
-
 module.exports = {
    createSvgObject,
    g,
@@ -243,10 +195,6 @@ module.exports = {
    text,
    title,
    animate,
-   quadraticA,
-   moveA,
-   moveR,
-   arcA,
-   complete,
+   pathUtils,
    stringify: SVG.stringify
 }

@@ -3,6 +3,7 @@ import {expectSnapshot} from './test-utils'
 import {Arc, VerticalLine, HorizontalLine, Point, Points, Rect} from '../src'
 
 const toSvg = require('../src/index')
+const u = toSvg.pathUtils
 describe('fixing-path', () => {
    test('heart', () => {
       const boundingRect: Rect = {y: 0, x:0, height: 1000, width: 1000}
@@ -26,11 +27,11 @@ describe('fixing-path', () => {
       ]
 
       const path = [
-         toSvg.moveA(startingPoint),
-         toSvg.arcA(leftUpper),
-         toSvg.arcA(rightUpper),
-         toSvg.quadraticA(rightLower),
-         toSvg.complete()
+         u.moveA(startingPoint),
+         u.arcA(leftUpper),
+         u.arcA(rightUpper),
+         u.quadraticA(rightLower),
+         u.complete()
       ]
       const json = [
          toSvg.rect({...boundingRect, fill: 'lightblue'}),
