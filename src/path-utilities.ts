@@ -26,7 +26,8 @@ export function arcA(arc: Arc | string): string {
 }
 
 /**
- * Accept an even numbered length of an array of points, or a string which passes straight through it
+ * Accept an even numbered length of an array of points, or a string which passes straight through it.
+ * Given an odd length of the array, throws an exception.
  * @param points
  */
 export function quadraticA(points: Point[] | string): string {

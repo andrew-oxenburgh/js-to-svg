@@ -1,4 +1,4 @@
-# to-svg
+# js-to-svg
 
 ## Use JS to create an SVG file.
 
@@ -10,7 +10,7 @@ I then realised it might be useful to others, so here it is.
 
 A benefit to this approach, is you can do any maths you need in JS, and then easily transfer it into an SVG. It might not look like much in a small SVG, but over a complex
 
-`to-svg` was built with the backend in mind. I was trying to create an icon by hand, and this sort of came out of it.
+`js-to-svg` was built with the backend in mind. I was trying to create an icon by hand, and this sort of came out of it.
 
 I added some shortcuts, so you can create a circle using cx, cy, and r as specified, but you can also pass in a bounding square, or a center point and radius which might save you some maths if you need to calc the same thing multiple times.
 
