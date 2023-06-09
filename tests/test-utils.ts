@@ -17,8 +17,10 @@ export function testUtils(json: object, title: string | null = null) {
    const svgFile = dir + testname.replace(/ /g, '_') + '.svg'
 
    !fs.existsSync(dir) && fs.mkdirSync(dir)
+
    fs.existsSync(htmlFile) && fs.unlinkSync(htmlFile)
    fs.writeFileSync(htmlFile, actual)
+
    fs.existsSync(svgFile) && fs.unlinkSync(svgFile)
    fs.writeFileSync(svgFile, actual)
 
