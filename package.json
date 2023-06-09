@@ -1,5 +1,5 @@
 {
-   "name": "to-svg",
+   "name": "js-to-svg",
    "version": "1.0.0",
    "description": "A way to describe svg images in js, with a bunch of helpers to make it a bit easier",
    "main": "src/index.js",
