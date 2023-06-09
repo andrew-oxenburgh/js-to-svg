@@ -1,20 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.quadraticA = exports.arcA = exports.complete = exports.moveR = exports.moveA = void 0;
-const moveA = (point) => {
+function moveA(point) {
     if (typeof point === 'string') {
         return point;
     }
     return `M${point.x},${point.y}`;
-};
+}
 exports.moveA = moveA;
-const moveR = (point) => {
+function moveR(point) {
+    if (typeof point === 'string') {
+        return point;
+    }
     return `m${point.x},${point.y}`;
-};
+}
 exports.moveR = moveR;
-const complete = () => {
+function complete() {
     return 'Z';
-};
+}
 exports.complete = complete;
 function arcA(arc) {
     if (typeof arc === 'string') {
@@ -24,7 +27,7 @@ function arcA(arc) {
 }
 exports.arcA = arcA;
 /**
- * Accept an array of points
+ * Accept an even numbered length of an array of points, or a string which passes straight through it
  * @param points
  */
 function quadraticA(points) {

@@ -183,6 +183,31 @@ describe('svg', () => {
          expectSnapshot(json, 'create a path')
       })
    })
+   describe('line', () => {
+      test('a short line', () => {
+         const json = toSvg.line({
+            from: {x:300, y:350},
+            to: {x:900, y:500},
+            fill: 'red',
+            stroke: 'orange',
+            'stroke-width': 10
+         })
+         expectSnapshot(json, 'create a path')
+      })
+   })
+   describe('text', () => {
+      test('a word', () => {
+         const json = toSvg.text({
+            'stroke-width': '4',
+            stroke: 'red',
+            fill: 'none',
+            font: ' 130px italic',
+            x: 0,
+            y: 500
+         }, 'some cool text')
+         expectSnapshot(json, 'create a path')
+      })
+   })
    describe('composite doc', () => {
       test('many circles', () => {
          const circle1 = toSvg.circle({
@@ -203,10 +228,16 @@ describe('svg', () => {
             fill: 'blue',
             stroke: 'none'
          })
+         const circle4 = toSvg.circle({
+            square: {x: 300, y: 300, side: 400},
+            fill: 'red',
+            stroke: 'none'
+         })
          expectSnapshot([
             circle1,
             circle2,
-            circle3
+            circle3,
+            circle4,
          ], 'got lots of things going on')
       })
    })

@@ -94,6 +94,7 @@ exports[`svg composite doc many circles 1`] = `
   <circle fill="yellow" r="500" stroke="none" cx="500" cy="500"/>
   <circle fill="green" r="400" stroke="none" cx="500" cy="500"/>
   <circle fill="blue" r="300" stroke="none" cx="500" cy="500"/>
+  <circle fill="red" stroke="none" cx="500" cy="500" r="200"/>
 </svg>"
 `;
 
@@ -101,6 +102,14 @@ exports[`svg doc empty doc 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
   <title>create an empty doc</title>
+</svg>"
+`;
+
+exports[`svg line a short line 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a path</title>
+  <line stroke-linecap="round" fill="red" stroke="orange" stroke-width="10" x1="300" y1="350" x2="900" y2="500"/>
 </svg>"
 `;
 
@@ -133,5 +142,13 @@ exports[`svg rect standard 1`] = `
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
   <title>create a rect using standard svg attributes</title>
   <rect width="777" height="888" x="0" y="1" fill="red" stroke="none"/>
+</svg>"
+`;
+
+exports[`svg text a word 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>create a path</title>
+  <text stroke-width="4" stroke="red" fill="none" font=" 130px italic" x="0" y="500">some cool text</text>
 </svg>"
 `;

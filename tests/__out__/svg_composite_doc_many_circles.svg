@@ -4,4 +4,5 @@
   <circle fill="yellow" r="500" stroke="none" cx="500" cy="500"/>
   <circle fill="green" r="400" stroke="none" cx="500" cy="500"/>
   <circle fill="blue" r="300" stroke="none" cx="500" cy="500"/>
+  <circle fill="red" stroke="none" cx="500" cy="500" r="200"/>
 </svg>

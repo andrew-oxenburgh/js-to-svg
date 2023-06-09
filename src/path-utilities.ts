@@ -1,19 +1,24 @@
 import {Arc, Point} from './index'
 
-export const moveA = (point: Point | string): string => {
+export function moveA(point: Point | string): string {
    if (typeof point === 'string') {
       return point
    }
    return `M${point.x},${point.y}`
 }
-export const moveR = (point: Point): string => {
+
+export function moveR(point: Point): string {
+   if (typeof point === 'string') {
+      return point
+   }
    return `m${point.x},${point.y}`
 }
-export const complete = (): string => {
+
+export function complete(): string {
    return 'Z'
 }
 
-export function arcA(arc: Arc | string) {
+export function arcA(arc: Arc | string): string {
    if (typeof arc === 'string') {
       return arc
    }
@@ -21,10 +26,10 @@ export function arcA(arc: Arc | string) {
 }
 
 /**
- * Accept an array of points
+ * Accept an even numbered length of an array of points, or a string which passes straight through it
  * @param points
  */
-export function quadraticA(points: Point[]) {
+export function quadraticA(points: Point[] | string): string {
    if (typeof points === 'string') {
       return points
    }
