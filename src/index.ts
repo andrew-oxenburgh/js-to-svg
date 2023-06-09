@@ -1,6 +1,10 @@
 import SVG = require('svgson')
 import * as pathUtils from './path-utilities'
 
+export type NumOrStr = number | string
+
+export type Children = object[]
+
 export type Size = {
    width: number,
    height: number
@@ -22,18 +26,29 @@ export type Points = Point[]
 
 export type Rect = Point & Size
 
+export type ZeroOrOne = 0 | 1 | '0' | '1'
+
+export type Square = {
+   x: number
+   y: number
+   side: number
+}
+
 export type Arc = {
    rx: number
    ry: number
    angle: number
-   largeArcFlag: 0 | 1
-   sweepFlag: 0 | 1
+   largeArcFlag: ZeroOrOne
+   sweepFlag: ZeroOrOne
    x: number
    y: number
 }
 
+export type Attrs = {
+   [key: string]: any
+}
 
-function useSomeShortCuts(attr: object, propName: string, tx: string[][]) {
+function useSomeShortCuts(attr: Attrs, propName: string, tx: string[][]) {
    if (typeof attr[propName] == 'object') {
       for (const off in tx) {
          const transform = tx[off]
@@ -43,7 +58,12 @@ function useSomeShortCuts(attr: object, propName: string, tx: string[][]) {
    }
 }
 
-function createSvgObject(attr: object, children: object[]): object {
+/**
+ * Creates an SVG object, ready for stringifying
+ * @param attr
+ * @param children
+ */
+function createSvgObject(attr: Attrs, children: Children): object {
    const DEF = {
       xmlns: 'http://www.w3.org/2000/svg',
    }
@@ -59,10 +79,10 @@ function createSvgObject(attr: object, children: object[]): object {
    }
 }
 
-const g = (children: object[], attr = {}): object => {
+const g = (children: Children, attr: Attrs = {}): object => {
    return elem('g', attr, children)
 }
-const elem = (name: string, attr = {}, children: object[] = []): object => {
+const elem = (name: string, attr: Attrs = {}, children: Children = []): object => {
    return {
       'name': name,
       'type': 'element',
@@ -72,7 +92,7 @@ const elem = (name: string, attr = {}, children: object[] = []): object => {
    }
 }
 
-const path = (attr: object, children: object[] = []): object => {
+const path = (attr: Attrs, children: Children = []): object => {
    const DEF = {}
    const attributes = {...DEF, ...attr}
 
@@ -82,7 +102,7 @@ const path = (attr: object, children: object[] = []): object => {
  * Rectangle
  * in @attr will accept a size, an origin, or a rectangle
  */
-const rect = (attr: object, children: object[] = []): object => {
+const rect = (attr: Attrs, children: Children = []): object => {
    const DEF = {}
    useSomeShortCuts(attr, 'size', [
       ['width', 'width'],
@@ -105,7 +125,7 @@ const rect = (attr: object, children: object[] = []): object => {
 
    return elem('rect', attributes, children)
 }
-const circle = (attr: object, children: object[] = []): object => {
+const circle = (attr: Attrs, children: Children = []): object => {
    const DEF = {
       fill: 'none',
    }
@@ -126,7 +146,7 @@ const circle = (attr: object, children: object[] = []): object => {
    const attributes = {...DEF, ...attr}
    return elem('circle', attributes, children)
 }
-const line = (attr: object, children: object[] = []): object => {
+const line = (attr: Attrs, children: Children = []): object => {
    const DEF = {
       'stroke-linecap': 'round'
    }
@@ -143,12 +163,17 @@ const line = (attr: object, children: object[] = []): object => {
    return elem('line', attributes, children)
 }
 
-const text = (attr = {}, text: string): object => {
+const text = (attr: Attrs = {}, text: string = 'unknown text'): object => {
+   const DEF = {
+      font: '30px italic',
+      fill: 'red',
+      stroke: 'green'
+   }
    return {
       'name': 'text',
       'type': 'element',
       'value': '',
-      'attributes': attr,
+      'attributes': {...DEF, ...attr},
       'children': [
          {
             'name': '',
@@ -177,7 +202,7 @@ const title = (text: string): object => {
       ]
    }
 }
-const animate = (attr = {}): object => {
+const animate = (attr: Attrs = {}): object => {
    return elem(
       'animate',
       attr

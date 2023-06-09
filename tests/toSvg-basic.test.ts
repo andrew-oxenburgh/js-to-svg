@@ -1,5 +1,6 @@
 'use strict'
 import {expectSnapshot} from './test-utils'
+import {Point, Rect, Size, Square} from "../src";
 
 const toSvg = require('../src/index')
 
@@ -36,7 +37,7 @@ describe('really small', () => {
 describe('animation', () => {
    describe('rect', () => {
       test('rx', () => {
-         const size = {width: 200, height: 200}
+         const size: Size = {width: 200, height: 200}
          const origin = {x: 0, y: 0}
          const json = toSvg.rect({
             origin,
@@ -115,8 +116,8 @@ describe('svg', () => {
          expectSnapshot(json, 'create a rect using standard svg attributes')
       })
       test('origin and size', () => {
-         const origin = {x: 0, y: 1}
-         const size = {width: 345, height: 678}
+         const origin: Point = {x: 0, y: 1}
+         const size: Size = {width: 345, height: 678}
          const json = toSvg.rect({
             origin,
             size,
@@ -126,7 +127,7 @@ describe('svg', () => {
          expectSnapshot(json, 'create a rect with an origin and a size')
       })
       test('rect', () => {
-         const rect = {x: 1, y: 2, width: 100, height: 200}
+         const rect: Rect = {x: 1, y: 2, width: 100, height: 200}
          const json = toSvg.rect({
             rect,
             fill: 'red',
@@ -157,7 +158,7 @@ describe('svg', () => {
          expectSnapshot(json, 'create a circle with a center point and a radius')
       })
       test('bounding square', () => {
-         const square = {x: 0, y: 0, side: 500}
+         const square: Square = {x: 0, y: 0, side: 500}
          const json = toSvg.circle({
             square,
             fill: 'red',
@@ -206,6 +207,10 @@ describe('svg', () => {
             y: 500
          }, 'some cool text')
          expectSnapshot(json, 'create a path')
+      })
+      test('blank', () => {
+         const json = toSvg.text()
+         expectSnapshot(json, 'what happens with a blank text call?')
       })
    })
    describe('composite doc', () => {
@@ -261,7 +266,7 @@ test('animateMotion', () => {
 })
 
 test('boxesWithinBoxes', () => {
-   function shrink(rect: { x: number, width: number, y: number, height: number }) {
+   function shrink(rect: Rect) {
       return {
          x: rect.x + 100,
          y: rect.y + 100,
@@ -269,10 +274,10 @@ test('boxesWithinBoxes', () => {
          height: rect.height - 200
       }
    }
-   const rect1 = {x: 0, y: 0, width: 1000, height: 1000}
-   const rect2 = shrink(rect1)
-   const rect3 = shrink(rect2)
-   const rect4 = shrink(rect3)
+   const rect1: Rect = {x: 0, y: 0, width: 1000, height: 1000}
+   const rect2: Rect = shrink(rect1)
+   const rect3: Rect = shrink(rect2)
+   const rect4: Rect = shrink(rect3)
    const json = toSvg.g([
       toSvg.rect({rect: rect1, fill: 'green', stroke: 'none'}),
       toSvg.rect({rect: rect2, fill: 'orange', stroke: 'none'}),

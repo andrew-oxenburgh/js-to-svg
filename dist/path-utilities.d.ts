@@ -1,6 +1,6 @@
 import { Arc, Point } from './index';
 export declare function moveA(point: Point | string): string;
-export declare function moveR(point: Point): string;
+export declare function moveR(point: Point | string): string;
 export declare function complete(): string;
 export declare function arcA(arc: Arc | string): string;
 /**

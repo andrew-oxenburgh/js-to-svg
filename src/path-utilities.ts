@@ -7,7 +7,7 @@ export function moveA(point: Point | string): string {
    return `M${point.x},${point.y}`
 }
 
-export function moveR(point: Point): string {
+export function moveR(point: Point | string): string {
    if (typeof point === 'string') {
       return point
    }

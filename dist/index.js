@@ -11,6 +11,11 @@ function useSomeShortCuts(attr, propName, tx) {
         delete attr[propName];
     }
 }
+/**
+ * Creates an SVG object, ready for stringifying
+ * @param attr
+ * @param children
+ */
 function createSvgObject(attr, children) {
     const DEF = {
         xmlns: 'http://www.w3.org/2000/svg',
@@ -96,12 +101,17 @@ const line = (attr, children = []) => {
     const attributes = Object.assign(Object.assign({}, DEF), attr);
     return elem('line', attributes, children);
 };
-const text = (attr = {}, text) => {
+const text = (attr = {}, text = 'unknown text') => {
+    const DEF = {
+        font: '30px italic',
+        fill: 'red',
+        stroke: 'green'
+    };
     return {
         'name': 'text',
         'type': 'element',
         'value': '',
-        'attributes': attr,
+        'attributes': Object.assign(Object.assign({}, DEF), attr),
         'children': [
             {
                 'name': '',
