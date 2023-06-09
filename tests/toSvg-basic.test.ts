@@ -240,7 +240,7 @@ test('animateMotion', () => {
    const green = '#8FBC8F'
    const path = 'M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z'
    const json = toSvg.g([
-      toSvg.rect({fill: green, stroke: 'none', rect: {x:0, y:0, width: 200, height: 100}}),
+      toSvg.rect({fill: green, stroke: 'none', rect: {x: 0, y: 0, width: 200, height: 100}}),
       toSvg.path({fill: 'none', stroke: 'lightgrey', d: path}),
       toSvg.circle({r: 5, fill: 'coral'}, [
          toSvg.elem('animateMotion', {
@@ -251,4 +251,26 @@ test('animateMotion', () => {
       ]),
    ])
    expectSnapshot(json, 'animateMotion')
+})
+
+test('boxesWithinBoxes', () => {
+   function shrink(rect: { x: number, width: number, y: number, height: number }) {
+      return {
+         x: rect.x + 100,
+         y: rect.y + 100,
+         width: rect.width - 200,
+         height: rect.height - 200
+      }
+   }
+   const rect1 = {x: 0, y: 0, width: 1000, height: 1000}
+   const rect2 = shrink(rect1)
+   const rect3 = shrink(rect2)
+   const rect4 = shrink(rect3)
+   const json = toSvg.g([
+      toSvg.rect({rect: rect1, fill: 'green', stroke: 'none'}),
+      toSvg.rect({rect: rect2, fill: 'orange', stroke: 'none'}),
+      toSvg.rect({rect: rect3, fill: 'yellow', stroke: 'none'}),
+      toSvg.rect({rect: rect4, fill: 'purple', stroke: 'none'}),
+   ])
+   expectSnapshot(json, 'boxesWithinBoxes')
 })
