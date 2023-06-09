@@ -21,11 +21,11 @@ function createSvgObject(attr, children) {
         xmlns: 'http://www.w3.org/2000/svg',
     };
     return {
-        'name': 'svg',
-        'type': 'element',
-        'value': '',
-        'attributes': Object.assign(Object.assign({}, DEF), attr),
-        'children': children
+        name: 'svg',
+        type: 'element',
+        value: '',
+        attributes: Object.assign(Object.assign({}, DEF), attr),
+        children: children
     };
 }
 const g = (children, attr = {}) => {
@@ -78,9 +78,9 @@ const circle = (attr, children = []) => {
     ]);
     if (typeof attr['square'] === 'object') {
         const square = attr['square'];
-        attr['cx'] = square.x + ((square === null || square === void 0 ? void 0 : square.side) / 2);
-        attr['cy'] = square.y + ((square === null || square === void 0 ? void 0 : square.side) / 2);
-        attr['r'] = (square === null || square === void 0 ? void 0 : square.side) / 2;
+        attr['cx'] = square['x'] + (square['side'] / 2);
+        attr['cy'] = square['y'] + (square['side'] / 2);
+        attr['r'] = square['side'] / 2;
         delete attr['square'];
     }
     const attributes = Object.assign(Object.assign({}, DEF), attr);
@@ -105,7 +105,9 @@ const text = (attr = {}, text = 'unknown text') => {
     const DEF = {
         font: '30px italic',
         fill: 'red',
-        stroke: 'green'
+        stroke: 'green',
+        x: 0,
+        y: '50%'
     };
     return {
         'name': 'text',

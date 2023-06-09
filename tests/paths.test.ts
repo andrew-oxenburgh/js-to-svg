@@ -1,12 +1,12 @@
 'use strict'
 import {expectSnapshot} from './test-utils'
-import {Arc, VerticalLine, HorizontalLine, Point, Points, Rect} from '../src'
+import {Arc, VerticalLine, HorizontalLine, Point, Points, Rect, Children} from '../src'
 
 const toSvg = require('../src/index')
 const u = toSvg.pathUtils
 describe('fixing-path', () => {
    test('heart', () => {
-      const boundingRect: Rect = {y: 0, x:0, height: 1000, width: 1000}
+      const boundingRect: Rect = {y: 0, x: 0, height: 1000, width: 1000}
       const centerLine: VerticalLine = {x: 500}
       const leftLine: VerticalLine = {x: 100}
       const rightLine: VerticalLine = {x: 900}
@@ -33,7 +33,8 @@ describe('fixing-path', () => {
          u.quadraticA(rightLower),
          u.complete()
       ]
-      const json = [
+
+      const json: Children = [
          toSvg.rect({...boundingRect, fill: 'lightblue'}),
          toSvg.path({
             id: 'heart',

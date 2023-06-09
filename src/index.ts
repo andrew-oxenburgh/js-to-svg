@@ -1,9 +1,14 @@
 import SVG = require('svgson')
 import * as pathUtils from './path-utilities'
 
-export type NumOrStr = number | string
-
-export type Children = object[]
+export type Child = {
+   name: string
+   type: 'element' | 'text'
+   value: string
+   attributes: Attrs
+   children: Child[]
+}
+export type Children = Child[]
 
 export type Size = {
    width: number,
@@ -45,7 +50,7 @@ export type Arc = {
 }
 
 export type Attrs = {
-   [key: string]: any
+   [key: string]: number | string | object
 }
 
 function useSomeShortCuts(attr: Attrs, propName: string, tx: string[][]) {
@@ -63,26 +68,26 @@ function useSomeShortCuts(attr: Attrs, propName: string, tx: string[][]) {
  * @param attr
  * @param children
  */
-function createSvgObject(attr: Attrs, children: Children): object {
+function createSvgObject(attr: Attrs, children: Children): Child {
    const DEF = {
       xmlns: 'http://www.w3.org/2000/svg',
    }
    return {
-      'name': 'svg',
-      'type': 'element',
-      'value': '',
-      'attributes': {
+      name: 'svg',
+      type: 'element',
+      value: '',
+      attributes: {
          ...DEF,
          ...attr
       },
-      'children': children
+      children: children
    }
 }
 
-const g = (children: Children, attr: Attrs = {}): object => {
+const g = (children: Children, attr: Attrs = {}): Child => {
    return elem('g', attr, children)
 }
-const elem = (name: string, attr: Attrs = {}, children: Children = []): object => {
+const elem = (name: string, attr: Attrs = {}, children: Children = []): Child => {
    return {
       'name': name,
       'type': 'element',
@@ -92,7 +97,7 @@ const elem = (name: string, attr: Attrs = {}, children: Children = []): object =
    }
 }
 
-const path = (attr: Attrs, children: Children = []): object => {
+const path = (attr: Attrs, children: Children = []): Child => {
    const DEF = {}
    const attributes = {...DEF, ...attr}
 
@@ -102,7 +107,7 @@ const path = (attr: Attrs, children: Children = []): object => {
  * Rectangle
  * in @attr will accept a size, an origin, or a rectangle
  */
-const rect = (attr: Attrs, children: Children = []): object => {
+const rect = (attr: Attrs, children: Children = []): Child => {
    const DEF = {}
    useSomeShortCuts(attr, 'size', [
       ['width', 'width'],
@@ -125,7 +130,7 @@ const rect = (attr: Attrs, children: Children = []): object => {
 
    return elem('rect', attributes, children)
 }
-const circle = (attr: Attrs, children: Children = []): object => {
+const circle = (attr: Attrs, children: Children = []): Child => {
    const DEF = {
       fill: 'none',
    }
@@ -137,16 +142,16 @@ const circle = (attr: Attrs, children: Children = []): object => {
 
    if (typeof attr['square'] === 'object') {
       const square = attr['square']
-      attr['cx'] = square.x + (square?.side / 2)
-      attr['cy'] = square.y + (square?.side / 2)
-      attr['r'] = square?.side / 2
+      attr['cx'] = square['x'] + (square['side'] / 2)
+      attr['cy'] = square['y'] + (square['side'] / 2)
+      attr['r'] = square['side'] / 2
       delete attr['square']
    }
 
    const attributes = {...DEF, ...attr}
    return elem('circle', attributes, children)
 }
-const line = (attr: Attrs, children: Children = []): object => {
+const line = (attr: Attrs, children: Children = []): Child => {
    const DEF = {
       'stroke-linecap': 'round'
    }
@@ -163,11 +168,13 @@ const line = (attr: Attrs, children: Children = []): object => {
    return elem('line', attributes, children)
 }
 
-const text = (attr: Attrs = {}, text: string = 'unknown text'): object => {
+const text = (attr: Attrs = {}, text = 'unknown text'): Child => {
    const DEF = {
       font: '30px italic',
       fill: 'red',
-      stroke: 'green'
+      stroke: 'green',
+      x: 0,
+      y: '50%'
    }
    return {
       'name': 'text',
@@ -185,7 +192,7 @@ const text = (attr: Attrs = {}, text: string = 'unknown text'): object => {
       ]
    }
 }
-const title = (text: string): object => {
+const title = (text: string): Child => {
    return {
       'name': 'title',
       'type': 'element',
@@ -202,7 +209,7 @@ const title = (text: string): object => {
       ]
    }
 }
-const animate = (attr: Attrs = {}): object => {
+const animate = (attr: Attrs = {}): Child => {
    return elem(
       'animate',
       attr

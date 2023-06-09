@@ -1,5 +1,11 @@
-export type NumOrStr = number | string;
-export type Children = object[];
+export type Child = {
+    name: string;
+    type: 'element' | 'text';
+    value: string;
+    attributes: Attrs;
+    children: Child[];
+};
+export type Children = Child[];
 export type Size = {
     width: number;
     height: number;
@@ -30,6 +36,6 @@ export type Arc = {
     y: number;
 };
 export type Attrs = {
-    [key: string]: any;
+    [key: string]: number | string | object;
 };
 //# sourceMappingURL=index.d.ts.map

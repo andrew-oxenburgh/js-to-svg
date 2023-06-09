@@ -149,7 +149,7 @@ exports[`svg text a word 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
   <title>create a path</title>
-  <text font=" 130px italic" fill="none" stroke="red" stroke-width="4" x="0" y="500">some cool text</text>
+  <text font=" 130px italic" fill="none" stroke="red" x="0" y="500" stroke-width="4">some cool text</text>
 </svg>"
 `;
 
@@ -157,6 +157,6 @@ exports[`svg text blank 1`] = `
 "<svg 
   xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
   <title>what happens with a blank text call?</title>
-  <text font="30px italic" fill="red" stroke="green">unknown text</text>
+  <text font="30px italic" fill="red" stroke="green" x="0" y="50%">unknown text</text>
 </svg>"
 `;
