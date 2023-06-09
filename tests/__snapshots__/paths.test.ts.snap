@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`fixing-path heart 1`] = `
+"<svg 
+  xmlns="http://www.w3.org/2000/svg" width="1000" height="1000">
+  <title>complex path</title>
+  <path id="heart" d="M100,300A200,200,0,0,1,500,300A200,200,0,0,1,900,300Q900,600,500,900Q100,600,100,300Z" fill="red"/>
+</svg>"
+`;

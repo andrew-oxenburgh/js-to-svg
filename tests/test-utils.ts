@@ -3,7 +3,7 @@ const pd = require('pretty-data').pd
 const fs = require('fs')
 const toSvg = require('../src')
 
-export function testUtils(json: object, title: string | null = null) {
+export function expectSnapshot(json: object, title: string | null = null) {
    const inputArray = title ? [toSvg.title(title), json] : [json]
    const wrapped = toSvg.createSvgObject(
       {width: 1000, height: 1000},

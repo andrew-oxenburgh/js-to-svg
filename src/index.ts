@@ -1,6 +1,38 @@
 import SVG = require('svgson')
-export type Origin = { x: number, y: number }
-export type Size = { width: number, height: number }
+
+export type Origin = {
+   x: number
+   y: number
+}
+export type Size = {
+   width: number,
+   height: number
+}
+export type Point = {
+   x: number
+   y: number
+}
+
+export type VerticalLine = {
+   x: number
+}
+
+export type HorizontalLine = {
+   y: number
+}
+
+export type Line = | VerticalLine | HorizontalLine
+
+export type Arc = {
+   rx: number
+   ry: number
+   angle: number
+   largeArcFlag: 0 | 1
+   sweepFlag: 0 | 1
+   x: number
+   y: number
+}
+
 
 function useSomeShortCuts(attr: object, propName: string, tx: string[][]) {
    if (typeof attr[propName] == 'object') {
@@ -42,8 +74,7 @@ const elem = (name: string, attr = {}, children: object[] = []): object => {
 }
 
 const path = (attr: object, children: object[] = []): object => {
-   const DEF = {
-   }
+   const DEF = {}
    const attributes = {...DEF, ...attr}
 
    return elem('path', attributes, children)
@@ -53,8 +84,7 @@ const path = (attr: object, children: object[] = []): object => {
  * in @attr will accept a size, an origin, or a rectangle
  */
 const rect = (attr: object, children: object[] = []): object => {
-   const DEF = {
-   }
+   const DEF = {}
    useSomeShortCuts(attr, 'size', [
       ['width', 'width'],
       ['height', 'height'],
@@ -86,7 +116,7 @@ const circle = (attr: object, children: object[] = []): object => {
       ['cy', 'y'],
    ])
 
-   if(typeof attr['square'] === 'object'){
+   if (typeof attr['square'] === 'object') {
       const square = attr['square']
       attr['cx'] = square.x + (square?.side / 2)
       attr['cy'] = square.y + (square?.side / 2)
@@ -154,6 +184,45 @@ const animate = (attr = {}): object => {
       attr
    )
 }
+
+const moveA = (point: Point): string => {
+   return `M${point.x},${point.y}`
+}
+
+const moveR = (point: Point): string => {
+   return `m${point.x},${point.y}`
+}
+
+const complete = (): string => {
+   return 'Z'
+}
+
+function arcA(arc: Arc | string) {
+   if (typeof arc === 'string') {
+      return arc
+   }
+   return `A${arc.rx},${arc.ry},${arc.angle},${arc.largeArcFlag},${arc.sweepFlag},${arc.x},${arc.y}`
+}
+
+/**
+ * Accept an array of points
+ * @param points
+ */
+function quadraticA(points: Point[]) {
+   if (typeof points === 'string') {
+      return points
+   }
+   if (points.length < 1) {
+      return ''
+   }
+   const res = 'Q' + points.reduce((acc: string, point: Point) => {
+      acc += `${point.x},${point.y},`
+      return acc
+   }, '')
+   const removeTrailingComma = res.slice(0, res.length - 1);
+   return removeTrailingComma
+}
+
 module.exports = {
    createSvgObject,
    g,
@@ -165,5 +234,10 @@ module.exports = {
    text,
    title,
    animate,
+   quadraticA,
+   moveA,
+   moveR,
+   arcA,
+   complete,
    stringify: SVG.stringify
 }

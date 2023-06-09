@@ -1,5 +1,5 @@
 'use strict'
-import {testUtils} from "./test-utils";
+import {expectSnapshot} from "./test-utils";
 
 const toSvg = require('../src/index')
 
@@ -23,7 +23,7 @@ describe('clipPath', () => {
                fill: 'red'
             })
       ]
-      testUtils(json, 'demonstrate clipping')
+      expectSnapshot(json, 'demonstrate clipping')
    })
 })
 describe('really small', () => {
@@ -52,7 +52,7 @@ describe('animation', () => {
                }
             )
          ])
-         testUtils(json, 'create a rect given a size and an origin')
+         expectSnapshot(json, 'create a rect given a size and an origin')
       })
    })
    describe('circle', () => {
@@ -97,7 +97,7 @@ describe('animation', () => {
                   }
                )
             ])]
-         testUtils(json, 'a bunch of really ugly animations')
+         expectSnapshot(json, 'a bunch of really ugly animations')
       })
    })
 })
@@ -112,7 +112,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         testUtils(json, 'create a rect using standard svg attributes')
+         expectSnapshot(json, 'create a rect using standard svg attributes')
       })
       test('origin and size', () => {
          const origin = {x: 0, y: 1}
@@ -123,7 +123,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         testUtils(json, 'create a rect with an origin and a size')
+         expectSnapshot(json, 'create a rect with an origin and a size')
       })
       test('rect', () => {
          const rect = {x: 1, y: 2, width: 100, height: 200}
@@ -132,7 +132,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         testUtils(json, 'create a rect with a input rect structure')
+         expectSnapshot(json, 'create a rect with a input rect structure')
       })
    })
    describe('circle', () => {
@@ -144,7 +144,7 @@ describe('svg', () => {
             fill: 'yellow',
             stroke: 'none'
          })
-         testUtils(json, 'create a circle with standard svg attributes')
+         expectSnapshot(json, 'create a circle with standard svg attributes')
       })
       test('point and radius', () => {
          const center = {x: 181, y: 191}
@@ -154,7 +154,7 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         testUtils(json, 'create a circle with a center point and a radius')
+         expectSnapshot(json, 'create a circle with a center point and a radius')
       })
       test('bounding square', () => {
          const square = {x: 0, y: 0, side: 500}
@@ -163,13 +163,13 @@ describe('svg', () => {
             fill: 'red',
             stroke: 'none'
          })
-         testUtils(json, 'create a circle with a bounding square')
+         expectSnapshot(json, 'create a circle with a bounding square')
       })
    })
 
    describe('doc', () => {
       test('empty doc', () => {
-         testUtils([], 'create an empty doc')
+         expectSnapshot([], 'create an empty doc')
       })
    })
    describe('path', () => {
@@ -180,7 +180,7 @@ describe('svg', () => {
             stroke: 'orange',
             'stroke-width': 10
          })
-         testUtils(json, 'create a path')
+         expectSnapshot(json, 'create a path')
       })
    })
    describe('composite doc', () => {
@@ -203,7 +203,7 @@ describe('svg', () => {
             fill: 'blue',
             stroke: 'none'
          })
-         testUtils([
+         expectSnapshot([
             circle1,
             circle2,
             circle3
@@ -226,7 +226,7 @@ test('animateMotion', () => {
          })
       ]),
    ])
-   testUtils(json, 'animateMotion')
+   expectSnapshot(json, 'animateMotion')
 })
 
 test('boxesWithinBoxes', () => {
@@ -248,5 +248,5 @@ test('boxesWithinBoxes', () => {
       toSvg.rect({rect: rect3, fill: 'yellow', stroke: 'none'}),
       toSvg.rect({rect: rect4, fill: 'purple', stroke: 'none'}),
    ])
-   testUtils(json, 'boxesWithinBoxes')
+   expectSnapshot(json, 'boxesWithinBoxes')
 })
