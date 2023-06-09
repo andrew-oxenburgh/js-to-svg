@@ -1,47 +1,45 @@
 'use strict'
-import {expectSnapshot} from "./test-utils";
-import {Point, Arc, Line} from "../src";
+import {expectSnapshot} from './test-utils'
+import {Arc, VerticalLine, HorizontalLine, Point, Points, Rect} from '../src'
 
 const toSvg = require('../src/index')
 describe('fixing-path', () => {
    test('heart', () => {
-      let centerLine: Line = {x: 500};
-      let bulgeLine: Line = {y: 300}
-      let leftLine: Line = {x: 100}
-      let rightLine: Line = {x: 900}
-      let topLine: Line = {y: 900}
-      let startingPoint: Point = {x: 100, ...bulgeLine};
+      const boundingRect: Rect = {y: 0, x:0, height: 1000, width: 1000}
+      const centerLine: VerticalLine = {x: 500}
+      const leftLine: VerticalLine = {x: 100}
+      const rightLine: VerticalLine = {x: 900}
+      const bulgeLine: HorizontalLine = {y: 300}
+      const lowerBulgeLine: HorizontalLine = {y: 600}
+      const topLine: HorizontalLine = {y: 900}
+      const startingPoint: Point = {x: 100, ...bulgeLine}
 
-      let dipPoint: Point = {...centerLine, ...bulgeLine};
-      let left: Line = {x: 900};
+      const dipPoint: Point = {...centerLine, ...bulgeLine}
 
-      let leftUpper: Arc = {rx: 200, ry: 200, angle: 0, largeArcFlag: 0, sweepFlag: 1, ...dipPoint};
-      let rightUpper: Arc = {...leftUpper, ...left};
-      let rightLower: Point[] = [{...rightLine, y: 600}, {...centerLine, ...topLine}];
-      let leftLower: Point[] = [{...leftLine, y: 600}, startingPoint];
+      const leftUpper: Arc = {rx: 200, ry: 200, angle: 0, largeArcFlag: 0, sweepFlag: 1, ...dipPoint}
+      const rightUpper: Arc = {...leftUpper, ...rightLine}
+      const rightLower: Points = [
+         {...rightLine, ...lowerBulgeLine},
+         {...centerLine, ...topLine},
+         {...leftLine, ...lowerBulgeLine},
+         startingPoint
+      ]
 
-      let moveTo = toSvg.moveA(startingPoint);
-      let arc1 = toSvg.arcA(leftUpper);
-      let arc2 = toSvg.arcA(rightUpper)
-      let quad1 = toSvg.quadraticA(rightLower);
-      let quad2 = toSvg.quadraticA(leftLower);
-      let z = toSvg.complete();
-
-      let path = [
-         moveTo,
-         arc1,
-         arc2,
-         quad1,
-         quad2,
-         z
-      ];
+      const path = [
+         toSvg.moveA(startingPoint),
+         toSvg.arcA(leftUpper),
+         toSvg.arcA(rightUpper),
+         toSvg.quadraticA(rightLower),
+         toSvg.complete()
+      ]
       const json = [
+         toSvg.rect({...boundingRect, fill: 'lightblue'}),
          toSvg.path({
             id: 'heart',
             d: path.join(''),
-            fill: 'red'
+            fill: 'lightcoral'
          }),
       ]
-      expectSnapshot(json, 'complex path')
+      expectSnapshot(json, 'complex path using arcs and quads')
    })
 })

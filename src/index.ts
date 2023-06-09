@@ -13,6 +13,15 @@ export type Point = {
    y: number
 }
 
+export type Rect = {
+   x: number
+   y: number
+   width: number
+   height: number
+}
+
+export type Points = Point[]
+
 export type VerticalLine = {
    x: number
 }
@@ -219,7 +228,7 @@ function quadraticA(points: Point[]) {
       acc += `${point.x},${point.y},`
       return acc
    }, '')
-   const removeTrailingComma = res.slice(0, res.length - 1);
+   const removeTrailingComma = res.slice(0, res.length - 1)
    return removeTrailingComma
 }
 

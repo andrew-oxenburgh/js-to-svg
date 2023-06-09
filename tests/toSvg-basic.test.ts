@@ -1,5 +1,5 @@
 'use strict'
-import {expectSnapshot} from "./test-utils";
+import {expectSnapshot} from './test-utils'
 
 const toSvg = require('../src/index')
 
@@ -45,11 +45,11 @@ describe('animation', () => {
             stroke: 'none',
          }, [
             toSvg.animate({
-                  attributeName: 'rx',
-                  values: '0;200;0',
-                  dur: '2s',
-                  repeatCount: 'indefinite'
-               }
+               attributeName: 'rx',
+               values: '0;200;0',
+               dur: '2s',
+               repeatCount: 'indefinite'
+            }
             )
          ])
          expectSnapshot(json, 'create a rect given a size and an origin')
@@ -69,32 +69,32 @@ describe('animation', () => {
                stroke: 'none',
             }, [
                toSvg.animate({
-                     attributeName: 'r',
-                     values: '0;100;0',
-                     dur: '5s',
-                     repeatCount: 'indefinite'
-                  }
+                  attributeName: 'r',
+                  values: '0;100;0',
+                  dur: '5s',
+                  repeatCount: 'indefinite'
+               }
                ),
                toSvg.animate({
-                     attributeName: 'fill',
-                     values: 'blue;red;green',
-                     dur: '3s',
-                     repeatCount: 'indefinite'
-                  }
+                  attributeName: 'fill',
+                  values: 'blue;red;green',
+                  dur: '3s',
+                  repeatCount: 'indefinite'
+               }
                ),
                toSvg.animate({
-                     attributeName: 'cx',
-                     values: '0;400',
-                     dur: '5s',
-                     repeatCount: 'indefinite'
-                  }
+                  attributeName: 'cx',
+                  values: '0;400',
+                  dur: '5s',
+                  repeatCount: 'indefinite'
+               }
                ),
                toSvg.animate({
-                     attributeName: 'cy',
-                     values: '0;400',
-                     dur: '5s',
-                     repeatCount: 'indefinite'
-                  }
+                  attributeName: 'cy',
+                  values: '0;400',
+                  dur: '5s',
+                  repeatCount: 'indefinite'
+               }
                )
             ])]
          expectSnapshot(json, 'a bunch of really ugly animations')

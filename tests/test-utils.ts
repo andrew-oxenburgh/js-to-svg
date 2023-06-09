@@ -1,4 +1,4 @@
-import {expect} from "@jest/globals";
+import {expect} from '@jest/globals'
 const pd = require('pretty-data').pd
 const fs = require('fs')
 const toSvg = require('../src')
