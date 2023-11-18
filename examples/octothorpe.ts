@@ -41,7 +41,7 @@ const style = {
    'stroke-width': 20,
 }
 
-const json = toSvg.createSvgObject([
+const json = toSvg.createSvgObject({width, height}, [
    toSvg.g([
       toSvg.line({
          from: topLeftPoint,
@@ -63,7 +63,7 @@ const json = toSvg.createSvgObject([
          to: rightLowerPoint,
          ...style
       }),
-   ])], origin, size)
+   ])])
 
 const svgDoc = toSvg.stringify(json)
 !fs.existsSync(path) && fs.mkdirSync(path)
